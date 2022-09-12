@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailuserbar %}
+{% load static wagtailcore_tags wagtailuserbar tailwind_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +22,7 @@
         {% endif %}
 
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/stbcms.css' %}">
+        {% tailwind_css %}
 
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}

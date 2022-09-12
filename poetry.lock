@@ -112,6 +112,17 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-browser-reload"
+version = "1.6.0"
+description = "Automatically reload your browser in development."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
 name = "django-dotenv"
 version = "1.4.2"
 description = "foreman reads from .env. manage.py doesn't. Let's fix that."
@@ -199,6 +210,18 @@ python-versions = ">=3.6"
 
 [package.dependencies]
 Django = ">=3.2"
+
+[[package]]
+name = "django-tailwind"
+version = "3.4.0"
+description = "Tailwind CSS Framework for Django projects"
+category = "main"
+optional = false
+python-versions = ">=3.8,<4.0"
+
+[package.dependencies]
+django = ">=3.2.14"
+django-browser-reload = ">=1.6.0,<2.0.0"
 
 [[package]]
 name = "django-treebeard"
@@ -548,7 +571,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "1502059692d6371553a9356ac4cc560821f3c44e708b5e38b0be76d8a2726dd1"
+content-hash = "a99e4e4343bfcd222795c47288ed9dd93c60a65d2ab20c585dee7de38482778b"
 
 [metadata.files]
 anyascii = [
@@ -566,6 +589,7 @@ certifi = []
 charset-normalizer = []
 dj-database-url = []
 django = []
+django-browser-reload = []
 django-dotenv = [
     {file = "django-dotenv-1.4.2.tar.gz", hash = "sha256:3812bb0f4876cf31f902aad140f0645e120e51ee30eb7c40c22050f58a0e4adb"},
     {file = "django_dotenv-1.4.2-py2.py3-none-any.whl", hash = "sha256:a9b1b40a70bd321acd231926acedb9bd2c5e873e33a1873b34a7276d196a765e"},
@@ -582,6 +606,7 @@ django-permissionedforms = [
 ]
 django-storages = []
 django-taggit = []
+django-tailwind = []
 django-treebeard = [
     {file = "django-treebeard-4.5.1.tar.gz", hash = "sha256:80150017725239702054e5fa64dc66e383dc13ac262c8d47ee5a82cb005969da"},
     {file = "django_treebeard-4.5.1-py3-none-any.whl", hash = "sha256:7c2b1cdb1e9b46d595825186064a1228bc4d00dbbc186db5b0b9412357fba91c"},
