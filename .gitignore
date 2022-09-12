@@ -1,0 +1,11 @@
+__pycache__
+
+.vscode
+.DS_Store
+.env*
+
+media
+fixtures
+
+dev-database/*
+!dev-database/init.sh
