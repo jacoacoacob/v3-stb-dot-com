@@ -7,9 +7,7 @@ import dotenv
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "stbcms.settings.dev")
 
-    if os.getenv("DJANGO_SETTINGS_MODULE") == "stbcms.settings.dev":
-        dotenv.read_dotenv(".env")
-
+    dotenv.read_dotenv(".env")
 
     from django.core.management import execute_from_command_line
 
