@@ -1,6 +1,7 @@
 ## Observed Behavior
 _What happened? Provide details about the the behavior you and the sequence of actions you took that led up to you experiencing it._
 
+
 ## Expected Behavior
 _What did you expect to happen?_
 
