@@ -36,21 +36,22 @@ class MenuSectionItem(Orderable):
 
 @register_snippet
 class MenuSection(ClusterableModel):
-  name = models.CharField(max_length=140)
-  slug = AutoSlugField(populate_from="name", editable=True)
+  title = models.CharField(max_length=140)
+  slug = AutoSlugField(populate_from="title", editable=True)
 
   panels = [
-    FieldPanel("name"),
+    FieldPanel("title"),
+    FieldPanel("slug"),
     InlinePanel("items", heading="Links", label="Link"),
   ]
 
   def __str__(self) -> str:
-    return f"[menu-section] :: {self.name}"
+    return f"[menu-section] {self.title}"
 
 
 class Menu(ClusterableModel):
-  name = models.CharField(max_length=140)
-  slug = AutoSlugField(populate_from="name", editable=True)
+  title = models.CharField(max_length=140)
+  slug = AutoSlugField(populate_from="title", editable=True)
 
   sections = StreamField(
     [
@@ -64,3 +65,6 @@ class Menu(ClusterableModel):
     FieldPanel("slug"),
     FieldPanel("sections"),
   ]
+
+  def __str__(self) -> str:
+    return f"[menu] {self.name}"

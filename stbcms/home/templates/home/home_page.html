@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags theme_icon %}
 
 {% block content %}
 <section class="flex flex-col p-4">
@@ -8,7 +8,7 @@
       {% include_block block %}
     {% elif block.block_type == "article" %}
       <div class="flex justify-center">
-        <div class="prose">
+        <div class="prose prose-lg">
           {% include_block block %}
         </div>
       </div>

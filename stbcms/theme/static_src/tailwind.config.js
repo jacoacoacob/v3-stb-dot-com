@@ -11,6 +11,8 @@ module.exports = {
          * HTML. Paths to Django template files that will contain Tailwind CSS classes.
          */
 
+        "./templates/**/*.html",
+
         /*  Templates within theme app (<tailwind_app_name>/templates), e.g. base.html. */
         '../templates/**/*.html',
 
@@ -42,7 +44,28 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {
+            typography: ({ theme }) => ({
+                DEFAULT: {
+                    css: {
+                        maxWidth: "600px",
+                        a: {
+                            transition: "box-shadow .1s ease",
+                            color: theme("colors.slate.700"),
+                            textDecoration: "none",
+                            boxShadow: `inset 0 -2px ${theme("colors.green.400")}`,
+                            "&:hover": {
+                                boxShadow: `inset 0 -6px ${theme("colors.green.400")}`
+                            },
+                            "&:focus": {
+                                outline: "none",
+                                boxShadow: `inset 0 -6px ${theme("colors.green.400")}`
+                            },
+                        }
+                    }
+                }
+            })
+        },
     },
     plugins: [
         /**
