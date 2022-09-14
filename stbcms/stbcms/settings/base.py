@@ -27,8 +27,12 @@ INSTALLED_APPS = [
     "home",
     "search",
     "blocks",
+    "menus",
+
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.styleguide",
+    "wagtail.contrib.modeladmin",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
