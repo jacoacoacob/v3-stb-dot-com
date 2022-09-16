@@ -1,5 +1,3 @@
-from atexit import register
-import imp
 from django import template
 
 register = template.Library()

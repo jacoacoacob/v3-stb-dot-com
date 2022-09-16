@@ -1,0 +1,28 @@
+{% load theme_icon %}
+
+<footer class="py-10 bg-slate-100 flex justify-center">
+  <div class="flex-1 flex justify-between max-w-2xl">
+    {% for section in menu.sections %}
+      <div>
+        <h1 class="font-semibold text-xl">
+          {{ section.value.title }}
+        </h1>
+        <ul class="flex flex-col">
+          {% for item in section.value.items.all %}
+            <li>
+              {% if item.is_external %}
+                <a class="flex items-center space-x-1" href="{{ item.href }}" target="_blank" rel="noopener noreferrer">
+                  <span>{{ item.text }} </span>{% theme_icon "external-link" class="h-4" %}
+                </a>
+              {% else %}
+                <a class="flex items-center" href="{{ item.href }}" >
+                  {{ item.text }}
+                </a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+</footer>

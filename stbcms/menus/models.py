@@ -22,6 +22,15 @@ class MenuSectionItem(Orderable):
     on_delete=models.CASCADE
   )
 
+  @property
+  def href(self):
+    print(type(self.page))
+    return self.external_url or self.page.url
+
+  @property
+  def is_external(self):
+    return self.page is None
+
   panels = [
     FieldPanel("text"),
     FieldPanel("external_url"),
@@ -61,10 +70,10 @@ class Menu(ClusterableModel):
   )
 
   panels = [
-    FieldPanel("name"),
+    FieldPanel("title"),
     FieldPanel("slug"),
     FieldPanel("sections"),
   ]
 
   def __str__(self) -> str:
-    return f"[menu] {self.name}"
+    return f"[menu] {self.title}"

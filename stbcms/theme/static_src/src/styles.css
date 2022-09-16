@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .navbar {
+    @apply 
+    sticky top-0 z-10
+    bg-white
+    w-full
+    flex justify-between items-center
+    px-4 py-1
+    border-b-2 border-slate-300 border-dashed;
+  }
+}

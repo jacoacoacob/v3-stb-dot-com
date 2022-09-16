@@ -48,7 +48,7 @@ module.exports = {
             typography: ({ theme }) => ({
                 DEFAULT: {
                     css: {
-                        maxWidth: "600px",
+                        maxWidth: theme("maxWidth.2xl"),
                         a: {
                             transition: "box-shadow .1s ease",
                             color: theme("colors.slate.700"),
