@@ -24,7 +24,6 @@ class MenuSectionItem(Orderable):
 
   @property
   def href(self):
-    print(type(self.page))
     return self.external_url or self.page.url
 
   @property

@@ -9,9 +9,9 @@ class HeroBlock(StructBlock):
     [
       ("heading", CharBlock(max_length=140)),
       ("text", RichTextBlock(features=["h2", "h3", "h4", "bold", "italic", "ol", "ul", "link"])),
-      ("link", LinkBlock(features=["link"]))
+      ("link", LinkBlock())
     ],
-    label_format="Call To Action"
+    label="Call To Action"
   )
 
   class Meta:

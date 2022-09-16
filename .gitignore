@@ -5,8 +5,8 @@ __pycache__
 .env*
 
 media
-static
 fixtures
+stbcms/static
 
 dev-database/*
 !dev-database/init.sh

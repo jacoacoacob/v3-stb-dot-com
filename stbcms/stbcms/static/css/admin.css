@@ -1,0 +1,12 @@
+.link-block {
+  padding-left: 1.25rem;
+  border-left: 1px dashed transparent;
+}
+
+.w-panel__content:hover .link-block {
+  border-left-color: #bbb;
+}
+
+.w-panel__content .link-block:hover {
+  border-left-color: #333;
+}
