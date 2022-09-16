@@ -166,7 +166,7 @@ MEDIA_URL = "/media/"
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "stbcms"
+WAGTAIL_SITE_NAME = "StrikeTheBan"
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
