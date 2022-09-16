@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "search",
     "blocks",
     "menus",
+    "events",
 
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",

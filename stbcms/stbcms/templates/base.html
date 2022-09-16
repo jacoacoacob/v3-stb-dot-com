@@ -26,12 +26,14 @@
         {% tailwind_css %}
     </head>
 
-    <body class="{% block body_class %}{% endblock %}">
+    <body>
         {% wagtailuserbar %}
 
         {% navbar %}
 
-        {% block content %}{% endblock %}
+        <main class="min-h-[calc(100vh-50px)]">
+            {% block content %}{% endblock %}
+        </main>
 
         {% footer %}
     </body>

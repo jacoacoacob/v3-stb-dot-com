@@ -8,6 +8,7 @@ from wagtail.telepath import register
 
 
 class LinkBlock(StructBlock):
+  text = CharBlock(max_length=240)
   kind = ChoiceBlock(
     default="url",
     choices=[
@@ -16,7 +17,6 @@ class LinkBlock(StructBlock):
     ],
     help_text='If you want to link to a page on some other website (e.g. twitter.com) chose "URL". If you want to link to a page on this site, choose "Page"'
   )
-  text = CharBlock(max_length=240)
   page = PageChooserBlock(required=False)
   url = URLBlock(required=False, label="URL")
 

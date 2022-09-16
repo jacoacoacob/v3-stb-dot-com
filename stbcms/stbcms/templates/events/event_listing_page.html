@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+  {% for page in event_pages %}
+    <a href="{% pageurl page %}">{{ page.title }}</a>
+  {% endfor %}
+{% endblock %}

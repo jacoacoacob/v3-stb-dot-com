@@ -21,3 +21,6 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         FieldPanel("body")
     ]
+
+    parent_page_types = []
+    subpage_types = ["events.EventListingPage"]
