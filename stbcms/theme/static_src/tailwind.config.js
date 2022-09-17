@@ -6,6 +6,7 @@
  */
 
 module.exports = {
+    darkMode: "class",
     content: [
         /**
          * HTML. Paths to Django template files that will contain Tailwind CSS classes.
@@ -60,6 +61,23 @@ module.exports = {
                             "&:focus": {
                                 outline: "none",
                                 boxShadow: `inset 0 -6px ${theme("colors.green.400")}`
+                            },
+                        }
+                    }
+                },
+                invert: {
+                    css: {
+                        a: {
+                            transition: "box-shadow .1s ease",
+                            color: theme("colors.slate.200"),
+                            textDecoration: "none",
+                            boxShadow: `inset 0 -2px ${theme("colors.green.600")}`,
+                            "&:hover": {
+                                boxShadow: `inset 0 -6px ${theme("colors.green.600")}`
+                            },
+                            "&:focus": {
+                                outline: "none",
+                                boxShadow: `inset 0 -6px ${theme("colors.green.600")}`
                             },
                         }
                     }

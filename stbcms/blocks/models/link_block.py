@@ -31,6 +31,9 @@ class LinkBlockValue(StructValue):
       return self.get("_text") or self.get("_page").title
     return self.get("_text")
 
+  def is_external(self):
+    return self.get("_kind") == "URL"
+
 
 class LinkBlock(StructBlock):
   _text = CharBlock(max_length=240, required=False, label="Text")

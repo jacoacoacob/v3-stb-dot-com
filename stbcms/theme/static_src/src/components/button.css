@@ -1,0 +1,56 @@
+@tailwind components;
+
+@layer components {
+  .button {
+    @apply
+    inline-block px-4 py-2 border rounded border-slate-400;
+  }
+  .button-sm {
+    @apply px-2 py-1;
+  }
+  .button-lg {
+    @apply px-6 py-2 text-xl;
+  }
+  .button-xl {
+    @apply px-8 py-3 text-xl;
+  }
+
+  .button-shadow,
+  .button-shadow-sm,
+  .button-shadow-lg {
+    @apply transition-shadow;
+  }
+
+  .button-shadow-sm:hover,
+  .button-shadow-sm:focus {
+    box-shadow: 2px 2px 0 theme("colors.green.600"),
+                4px 4px 0 theme("colors.green.400");
+  }
+  .dark .button-shadow-sm:hover,
+  .dark .button-shadow-sm:focus {
+    box-shadow: 2px 2px 0 theme("colors.green.800"),
+                4px 4px 0 theme("colors.green.600");
+  }
+
+  .button-shadow:hover,
+  .button-shadow:focus {
+    box-shadow: 3px 3px 0 theme("colors.green.600"),
+                6px 6px 0 theme("colors.green.400");
+  }
+  .dark .button-shadow:hover,
+  .dark .button-shadow:focus {
+    box-shadow: 3px 3px 0 theme("colors.green.800"),
+                6px 6px 0 theme("colors.green.600");
+  }
+  .button-shadow-lg:hover,
+  .button-shadow-lg:focus {
+    box-shadow: 5px 5px 0 theme("colors.green.600"),
+                10px 10px 0 theme("colors.green.400");
+  }
+  .dark .button-shadow-lg:hover,
+  .dark .button-shadow-lg:focus {
+    box-shadow: 5px 5px 0 theme("colors.green.800"),
+                10px 10px 0 theme("colors.green.600");
+  }
+}
+ 

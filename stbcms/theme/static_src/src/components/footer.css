@@ -1,0 +1,13 @@
+.footer {
+  @apply
+  py-10 space-y-4
+  bg-slate-100 dark:bg-slate-900
+  flex flex-col items-center
+}
+.footer__icon-link {
+  @apply
+  inline-block 
+  p-2 rounded-full
+  hover:bg-slate-200 focus:bg-slate-200
+  dark:hover:bg-slate-700 dark:focus:bg-slate-700
+}

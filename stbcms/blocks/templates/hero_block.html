@@ -1,9 +1,8 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags icon %}
 
-
-<div class="w-full min-h-screen flex items-center">
+<div class="w-full min-h-[calc(100vh-50px)] flex items-center">
   <div class="flex-1 p-4">
-    <div class="relative bg-slate-100">
+    <div class="relative">
       {% image value.image scale-100 class="rounded-sm" %}
       <div class="absolute top-0 w-full h-full bg-gradient-to-r from-blue-400 to-red-300 opacity-40"></div>
     </div>
@@ -12,16 +11,25 @@
     <h1 class="text-3xl">
       {{ value.cta.heading }}
     </h1>
-    <div class="prose">
+    <div class="prose dark:prose-invert prose-lg">
       {{ value.cta.text | richtext }}
     </div>
     <a
       href="{{ value.cta.link.href }}"
+      {% if value.cta.link.is_external %}
       target="_blank"
       rel="noopener noreferrer"
-      class="p-4 border border-slate-400"
+      {% endif %}
+      class="button button button-shadow"
     >
-      {{ value.cta.link.text }}
+      <div class="flex items-center space-x-1">
+        <span>
+          {{ value.cta.link.text }}
+        </span>
+        {% if value.cta.link.is_external %}
+          {% icon "external-link" class="h-5 w-5" %}
+        {% endif %}
+      </div>
     </a>
   </div>
 </div>

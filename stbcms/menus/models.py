@@ -1,6 +1,7 @@
 from django.db import models
 
 from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.blocks import StreamBlock, StructBlock, ListBlock, CharBlock, PageChooserBlock, BooleanBlock
 from wagtail.fields import StreamField
 from wagtail.models import Orderable
 from wagtail.snippets.blocks import SnippetChooserBlock
@@ -9,6 +10,8 @@ from wagtail.snippets.models import register_snippet
 from django_extensions.db.fields import AutoSlugField
 from modelcluster.models import ClusterableModel
 from modelcluster.fields import ParentalKey
+
+from blocks.models import LinkBlock
 
 
 class MenuSectionItem(Orderable):
@@ -57,21 +60,55 @@ class MenuSection(ClusterableModel):
     return f"[menu-section] {self.title}"
 
 
+class NavbarBlock(StructBlock):
+  brand = CharBlock(max_length=32)
+  pages = ListBlock(PageChooserBlock())
+  call_to_action = ListBlock(LinkBlock(), max_num=2)
+
+
+class MobileMenuBlock(StructBlock):
+  brand = CharBlock(max_length=32)
+  pages = ListBlock(PageChooserBlock())
+  call_to_action = ListBlock(LinkBlock(), max_num=2)
+  include_social_media = BooleanBlock(required=False)
+
+
+class MenuSectionBlock(StructBlock):
+  title = CharBlock(max_length=64, blank=True, null=True, label="Section Title")
+  items = ListBlock(LinkBlock())
+
+class FooterBlock(StructBlock):
+  sections = ListBlock(MenuSectionBlock())
+  include_social_media = BooleanBlock(required=False)
+
+
+class MenuVariantBlock(StreamBlock):
+  footer = FooterBlock()
+  mobile_menu = MobileMenuBlock()
+  navbar = NavbarBlock()
+
+
+
 class Menu(ClusterableModel):
-  title = models.CharField(max_length=140)
+  title = models.CharField(max_length=140, unique=True)
   slug = AutoSlugField(populate_from="title", editable=True)
 
-  sections = StreamField(
+  variant = StreamField(
     [
-      ("section", SnippetChooserBlock("menus.MenuSection"))
+      ("footer", FooterBlock()),
+      ("mobile_menu", MobileMenuBlock()),
+      ("navbar", NavbarBlock()),
     ],
+    min_num=1,
+    max_num=1,
+    null=True,
     use_json_field=True
   )
 
   panels = [
     FieldPanel("title"),
     FieldPanel("slug"),
-    FieldPanel("sections"),
+    FieldPanel("variant"),
   ]
 
   def __str__(self) -> str:

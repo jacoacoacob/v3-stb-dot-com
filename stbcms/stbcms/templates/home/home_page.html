@@ -1,14 +1,14 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags theme_icon %}
+{% load static wagtailcore_tags icon %}
 
 {% block content %}
-  <section class="flex flex-col p-4">
+  <section class="flex flex-col px-4 ">
     {% for block in page.body %}
       {% if block.block_type == "hero" %}
         {% include_block block %}
       {% elif block.block_type == "article" %}
-        <div class="flex justify-center">
-          <div class="prose prose-lg">
+        <div class="flex justify-center ">
+          <div class="prose dark:prose-invert prose-lg w-full">
             {% include_block block %}
           </div>
         </div>

@@ -1,12 +1,69 @@
-<header class="sticky top-0 z-10 bg-white w-full flex-grow-0 flex justify-between items-center px-4 py-1 border-b-2 border-slate-300 border-dashed">
-  <h1 class="text-4xl font-bold">StrikeTheBan</h1>
-  <ul class="flex space-x-4 text-lg">
-    {% for is_active, page in pages %}
+{% load wagtailsettings_tags icon %}
+{% get_settings use_default_site=True %}
+
+{% with settings=settings.site_settings.SiteSettings %}
+<header class="navbar">
+  <h1 class="text-3xl font-mono">
+    {{ settings.brand_name }}
+  </h1>
+  <div class="flex items-center space-x-4 text-lg">
+    <ul class="flex space-x-4">
+      {% for is_active, page in pages %}
       <li>
-        <a href="{{ page.url }}" class="{% if is_active %}underline{% endif %}">
+        <a href="{{ page.url }}" class="{% if is_active %}underline decoration-2 decoration-green-500 {% endif %}">
           {{ page.title }}
         </a>
       </li>
-    {% endfor %}
-  </ul>
+      {% endfor %}
+    </ul>
+    <span>|</span>
+    <button id="toggle-dark-mode" title="Toggle light/dark mode">
+      <span id="toggle-dark-mode-dark-icon-wrapper">
+        {% icon "moon" class="h-5 w-5" %}
+      </span>
+      <span id="toggle-dark-mode-light-icon-wrapper">
+        {% icon "sun" class="h-5 w-5" %}
+      </span>
+    </button>
+  </div>
 </header>
+{% endwith %}
+<script type="text/javascript">
+  (function () {
+    var toggleDarkMode = document.getElementById("toggle-dark-mode");
+    var moonIcon = document.getElementById("toggle-dark-mode-dark-icon-wrapper");
+    var sunIcon = document.getElementById("toggle-dark-mode-light-icon-wrapper");
+
+    if (toggleDarkMode) {
+      toggleDarkMode.addEventListener("click", onToggleDarkMode);
+    }
+
+    function getIsDarkMode() {
+      return localStorage.getItem("dark-mode") === "true";
+    }
+
+    function setIsDarkMode(bool) {
+      localStorage.setItem("dark-mode", JSON.stringify(bool));
+    }
+
+    function onToggleDarkMode() {
+      setIsDarkMode(!getIsDarkMode());
+      updateUI();
+    }
+
+    function updateUI() {
+      var html = document.querySelector("html");
+      if (getIsDarkMode()) {
+        html.classList.add("dark");
+        moonIcon.style.display = "inline";
+        sunIcon.style.display = "none";
+      } else {
+        html.classList.remove("dark");
+        moonIcon.style.display = "none";
+        sunIcon.style.display = "inline";
+      }
+    }
+
+    updateUI();
+  })();
+</script>
