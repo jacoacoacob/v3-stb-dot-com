@@ -1,28 +1,60 @@
-{% load theme_icon %}
+{% load wagtailsettings_tags theme_icon %}
+{% get_settings use_default_site=True %}
 
 <footer class="py-10 bg-slate-100 flex justify-center">
   <div class="flex-1 flex justify-between max-w-2xl">
+    <div>
+      <h4 class="font-semibold text-xl">Pages</h4>
+      <ul class="flex flex-col">
+        {% for page in pages %}
+          <li>
+            <a href="{{ page.url }}">{{ page.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-semibold text-xl">Social Media</h4>
+      <ul class="space-y-2">
+        {% if settings.site_settings.SocialMediaSettings.facebook %}
+          <li>
+            <a href="{{ settings.site_settings.SocialMediaSettings.facebook }}" target="_blank" rel="noopener noreferrer">
+              {% theme_icon "facebook" title="Navigate to Facebook" %}
+            </a>
+          </li>
+          {% endif %}
+          {% if settings.site_settings.SocialMediaSettings.twitter %}
+          <li>
+            <a href="{{ settings.site_settings.SocialMediaSettings.twitter }}" target="_blank" rel="noopener noreferrer">
+              {% theme_icon "twitter" title="Navigate to Twitter" %}
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+    {% comment %}
     {% for section in menu.sections %}
-      <div>
-        <h1 class="font-semibold text-xl">
-          {{ section.value.title }}
-        </h1>
-        <ul class="flex flex-col">
-          {% for item in section.value.items.all %}
-            <li>
-              {% if item.is_external %}
-                <a class="flex items-center space-x-1" href="{{ item.href }}" target="_blank" rel="noopener noreferrer">
-                  <span>{{ item.text }} </span>{% theme_icon "external-link" class="h-4" %}
-                </a>
-              {% else %}
-                <a class="flex items-center" href="{{ item.href }}" >
-                  {{ item.text }}
-                </a>
-              {% endif %}
-            </li>
+    <div>
+      <h1 class="font-semibold text-xl">
+        {{ section.value.title }}
+      </h1>
+      <ul class="flex flex-col">
+        {% for item in section.value.items.all %}
+        <li>
+          {% if item.is_external %}
+          <a class="flex items-center space-x-1" href="{{ item.href }}" target="_blank" rel="noopener noreferrer">
+            <span>{{ item.text }} </span>{% theme_icon "external-link" class="h-4" %}
+          </a>
+          {% else %}
+          <a class="flex items-center" href="{{ item.href }}" >
+            {{ item.text }}
+          </a>
+          {% endif %}
+        </li>
           {% endfor %}
         </ul>
       </div>
-    {% endfor %}
-  </div>
+      {% endfor %}
+      {% endcomment %}
+    </div>
 </footer>

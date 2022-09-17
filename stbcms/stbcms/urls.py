@@ -27,7 +27,8 @@ if settings.DEBUG:
     # Setup `django-tailwind` browser reload
     # https://django-tailwind.readthedocs.io/en/latest/installation.html
     urlpatterns += [
-        path("__reload__/", include("django_browser_reload.urls"))
+        path("__reload__/", include("django_browser_reload.urls")),
+        path("__debug__/", include("debug_toolbar.urls")),
     ]
     # End setup `django-tailwind` browser reload
 

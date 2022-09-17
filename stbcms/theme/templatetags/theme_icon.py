@@ -7,4 +7,5 @@ def theme_icon(icon_name, **kwargs):
   return {
     "icon_name": icon_name,
     "class": kwargs.get("class"),
+    "title": kwargs.get("title"),
   }

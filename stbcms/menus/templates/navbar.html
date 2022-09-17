@@ -1,9 +1,9 @@
 <header class="sticky top-0 z-10 bg-white w-full flex-grow-0 flex justify-between items-center px-4 py-1 border-b-2 border-slate-300 border-dashed">
   <h1 class="text-4xl font-bold">StrikeTheBan</h1>
   <ul class="flex space-x-4 text-lg">
-    {% for page in pages %}
+    {% for is_active, page in pages %}
       <li>
-        <a href="{{ page.url }}">
+        <a href="{{ page.url }}" class="{% if is_active %}underline{% endif %}">
           {{ page.title }}
         </a>
       </li>
