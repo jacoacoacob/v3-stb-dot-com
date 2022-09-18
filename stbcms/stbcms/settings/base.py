@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     "events",
     "search",
     "blocks",
-    "site_settings",
 
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
