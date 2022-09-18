@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="{{ fill }}" stroke="{{ stroke }}" viewBox="{{ viewBox }}" class="{{ class }}">
+  {% if title %}<title>{{ title }}</title>{% endif %}
+  <desc>{{ description }}</desc>
+  {% for path in paths %}
+    <path d="{{ path }}" />
+  {% endfor %}
+</svg>
