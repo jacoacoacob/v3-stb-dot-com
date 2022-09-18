@@ -63,5 +63,5 @@ class Icon:
 # }
 
 
-# @register.inclusion_tag("tags/icon.html")
+# @register.inclusion_tag("template_tags/icon.html")
 # def icon(name, **kwargs):

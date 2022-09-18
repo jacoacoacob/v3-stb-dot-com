@@ -25,13 +25,13 @@ def is_page_active(context: RequestContext, page: Page):
     return req_path == page_url
   return req_path.startswith(page_url)
 
-@register.inclusion_tag("tags/footer.html")
+@register.inclusion_tag("template_tags/footer.html")
 def footer():
   return {
     "pages": get_main_site_pages()
   }
 
-@register.inclusion_tag("tags/navbar.html", takes_context=True)
+@register.inclusion_tag("template_tags/navbar.html", takes_context=True)
 def navbar(context: RequestContext):
   return {
     "pages": [(is_page_active(context, page), page) for page in get_main_site_pages()]

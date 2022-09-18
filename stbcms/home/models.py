@@ -23,4 +23,4 @@ class HomePage(Page):
     ]
 
     parent_page_types = []
-    subpage_types = ["events.EventListingPage"]
+    subpage_types = ["events.EventListingPage", "useful_links.UsefulLinksPage"]
