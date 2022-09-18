@@ -31,8 +31,10 @@
 
         {% navbar %}
 
-        <main class="min-h-[calc(100vh-50px)]">
-            {% block content %}{% endblock %}
+        <main class="min-h-[calc(100vh-50px)] flex justify-center ">
+            <div class="flex-1  max-w-7xl">
+                {% block content %}{% endblock %}
+            </div>
         </main>
 
         {% footer %}

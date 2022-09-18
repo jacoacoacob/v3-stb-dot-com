@@ -1,9 +1,16 @@
-.navbar {
-  @apply 
-  sticky top-0 z-10
-  bg-white dark:bg-slate-800
-  w-full
-  flex justify-between items-center
-  px-4 py-1
-  border-b-2 border-slate-300 border-dashed;
+@tailwind components;
+
+@layer components {
+  .navbar {
+    @apply 
+    sticky top-0 z-50
+    bg-white dark:bg-slate-800
+    w-full
+    flex justify-center
+    border-b-2 border-slate-300 dark:border-slate-600 border-dashed;
+  }
+  .navbar-content {
+    @apply flex-1 flex justify-between items-center max-w-7xl px-4 py-1;
+  }
 }
+

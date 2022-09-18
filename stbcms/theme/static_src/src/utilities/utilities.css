@@ -1,0 +1,10 @@
+@tailwind utilities;
+
+@layer utilities {
+  .site-full-height {
+    @apply min-h-[calc(100vh-50px)];
+  }
+  .site-half-height {
+    @apply min-h-[calc(50vh-50px)];
+  }
+}
