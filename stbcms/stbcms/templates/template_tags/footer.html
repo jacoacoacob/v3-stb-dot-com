@@ -4,14 +4,16 @@
 {% with settings=settings.core.SiteSettings %}
 <footer class="footer">
   <h1 class="font-mono text-2xl">{{ settings.brand_name }}</h1>
-  <ul class="flex space-x-2 text-lg">
-    {% for page in pages %}
-      <li>
-        <a href="{{ page.url }}">{{ page.title }}</a>
-      </li>
-      {% if not forloop.last %}<span class="font-thin">|</span>{% endif %}
-    {% endfor %}
-  </ul>
+  <nav>
+    <ul class="flex space-x-3 text-lg">
+      {% for page in pages %}
+        <li>
+          <a href="{{ page.url }}">{{ page.title }}</a>
+        </li>
+        {% if not forloop.last %}<span class="font-thin">|</span>{% endif %}
+      {% endfor %}
+    </ul>
+  </nav>
   <ul class="flex space-x-2">
     {% if settings.facebook %}
     <li>

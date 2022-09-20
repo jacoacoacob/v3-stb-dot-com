@@ -10,15 +10,17 @@
       </h1>
     </a>
     <div class="flex items-center space-x-6 text-lg">
-      <ul class="flex space-x-6">
-        {% for is_active, page in pages %}
-        <li>
-          <a href="{{ page.url }}" class="{% if is_active %}underline decoration-2 decoration-green-500 {% endif %}">
-            {{ page.title }}
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
+      <nav>
+        <ul class="flex space-x-6">
+          {% for is_active, page in pages %}
+          <li>
+            <a href="{{ page.url }}" class="{% if is_active %}underline decoration-2 decoration-green-500 {% endif %}">
+              {{ page.title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
       <span class="font-thin">|</span>
       <button id="toggle-dark-mode" title="Toggle light/dark mode">
         <span id="toggle-dark-mode-dark-icon-wrapper">

@@ -11,4 +11,3 @@ class BlogPostPage(Page):
 class BlogPostListingPage(Page):
   parent_page_types = ["home.HomePage"]
   subpage_types = ["blog.BlogPostPage"]
-
