@@ -1,0 +1,13 @@
+
+<section class="sticky top-12 flex justify-center w-full">
+  <ul class="flex-1 max-w-7xl px-4 flex space-x-2">
+    {% for page in ancestors %}
+      {% if not page.is_root %}
+        <li>
+          {{ page.title }}
+        </li>
+        {% if not forloop.last %}<span class="font-thin">/</span>{% endif %}
+      {% endif %}
+    {% endfor%}
+  </ul>
+</section>

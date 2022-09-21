@@ -1,3 +1,5 @@
+import re
+
 from django.core.handlers.wsgi import WSGIRequest
 from django.template import Library
 from django.template.context import RequestContext
@@ -33,7 +35,15 @@ def footer():
 
 @register.inclusion_tag("template_tags/navbar.html", takes_context=True)
 def navbar(context: RequestContext):
+  current_page: Page = context.get("self")
+  if not current_page or current_page.depth <= 2:
+    breadcrumbs = []
+  elif current_page:
+    breadcrumbs = Page.objects.ancestor_of(current_page, inclusive=True)
+  breadcrumbs = breadcrumbs[1:]
   return {
-    "pages": [(is_page_active(context, page), page) for page in get_main_site_pages()]
+    "pages": [(is_page_active(context, page), page) for page in get_main_site_pages()],
+    "breadcrumbs": breadcrumbs,
+    "is_breadcrumbs": len(breadcrumbs) > 0,
   }
 

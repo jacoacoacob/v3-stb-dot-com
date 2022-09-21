@@ -3,19 +3,16 @@
 
 {% block content %}
   <section class="flex flex-col">
-    <!-- <div class="absolute top-0 left-0 w-full h-full"></div>
-    <div class="z-10"> -->
-      {% for block in page.body %}
-        {% if block.block_type == "hero" %}
-          {% include_block block %}
-        {% elif block.block_type == "article" %}
-          <div class="flex justify-center items-center site-full-height p-4">
-            <div class="prose dark:prose-invert prose-lg">
-              {% include_block block %}
-            </div>
+    {% for block in page.body %}
+      {% if block.block_type == "hero" %}
+        {% include_block block %}
+      {% elif block.block_type == "article" %}
+        <div class="flex justify-center items-center site-full-height p-4">
+          <div class="prose dark:prose-invert prose-lg">
+            {% include_block block %}
           </div>
-        {% endif %}
-      {% endfor %}
-    <!-- </div> -->
+        </div>
+      {% endif %}
+    {% endfor %}
   </section>
 {% endblock content %}

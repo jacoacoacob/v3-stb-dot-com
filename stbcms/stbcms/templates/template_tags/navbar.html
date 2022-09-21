@@ -2,13 +2,15 @@
 {% get_settings use_default_site=True %}
 
 {% with settings=settings.core.SiteSettings %}
-<header class="navbar">
+<header class="navbar transition-all">
   <div class="navbar-content">
-    <a href="/">
-      <h1 class="text-3xl font-mono">
-        {{ settings.brand_name }}
-      </h1>
-    </a>
+    <div class="flex items-center space-x-2">
+      <a href="/">
+        <h1 class="text-2xl font-semibold font-mono">
+          {{ settings.brand_name }}
+        </h1>
+      </a>
+    </div>
     <div class="flex items-center space-x-6 text-lg">
       <nav>
         <ul class="flex space-x-6">
@@ -24,7 +26,7 @@
       <span class="font-thin">|</span>
       <button id="toggle-dark-mode" title="Toggle light/dark mode">
         <span id="toggle-dark-mode-dark-icon-wrapper">
-          {% icon "moon" class="h-4 w-4" %}
+          {% icon "moon" class="h-4 w-5" %}
         </span>
         <span id="toggle-dark-mode-light-icon-wrapper">
           {% icon "sun" class="h-5 w-5" %}
@@ -32,8 +34,61 @@
       </button>
     </div>
   </div>
+  <div class="navbar-breadcrumbs">
+    <div class="navbar-breadcrumbs-list-wrapper">
+      <ul class="navbar-breadcrumbs-list">
+        {% for page in breadcrumbs %}
+          <li>
+            {{ page.title }}
+          </li>
+          {% if not forloop.last %}<span class="font-thin">/</span>{% endif %}
+        {% endfor%}
+      </ul>
+    </div>
+  </div>
 </header>
 {% endwith %}
+<script type="text/javascript">
+  (function() {
+    var isBreadcrumbs = "{{ is_breadcrumbs }}" === "True";
+    var wasBreadcrumbs = JSON.parse(localStorage.wasBreadcrumbs || false);
+  
+    localStorage.wasBreadcrumbs = isBreadcrumbs;
+
+    var navbarBreadcrumbs = document.querySelector(".navbar-breadcrumbs");
+    var navbarBreadcrumbsList = document.querySelector(".navbar-breadcrumbs-list");
+    var navbarBreadcrumbsListWrapper = document.querySelector(".navbar-breadcrumbs-list-wrapper");
+
+    if (isBreadcrumbs) {
+      navbarBreadcrumbs.classList.add("h-6");
+    }
+
+    if (isBreadcrumbs && !wasBreadcrumbs) {
+      navbarBreadcrumbsListWrapper.classList.add(
+        "h-0",
+        "opacity-0",
+        "overflow-hidden",
+        "transition-all",
+        "duration-300",
+      );
+      setTimeout(function() {
+        if (true) {
+          navbarBreadcrumbsListWrapper.classList.remove(
+            "h-0",
+            "opacity-0",
+          );
+          navbarBreadcrumbsListWrapper.classList.add(
+            "h-6",
+            "opacity-100"
+          );
+        }
+      });
+    }
+  
+    console.log("isBreadcrumbs", isBreadcrumbs);
+    console.log("wasBreadcrumbs", wasBreadcrumbs);
+  })();
+</script>
 <script type="text/javascript">
   (function () {
     var toggleDarkMode = document.getElementById("toggle-dark-mode");
@@ -73,3 +128,6 @@
     updateUI();
   })();
 </script>
+
+{% comment %}
+{% endcomment %}
