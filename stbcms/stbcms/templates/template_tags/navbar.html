@@ -1,4 +1,4 @@
-{% load wagtailsettings_tags icon %}
+{% load wagtailcore_tags wagtailsettings_tags icon %}
 {% get_settings use_default_site=True %}
 
 {% with settings=settings.core.SiteSettings %}
@@ -39,7 +39,9 @@
       <ul class="navbar-breadcrumbs-list">
         {% for page in breadcrumbs %}
           <li>
-            {{ page.title }}
+            <a href="{% pageurl page %}" class="{% if forloop.last %}font-semibold{% endif %}">
+              {{ page.title }}
+            </a>
           </li>
           {% if not forloop.last %}<span class="font-thin">/</span>{% endif %}
         {% endfor%}
@@ -51,7 +53,14 @@
 <script type="text/javascript">
   (function() {
     var isBreadcrumbs = "{{ is_breadcrumbs }}" === "True";
-    var wasBreadcrumbs = JSON.parse(localStorage.wasBreadcrumbs || false);
+    var wasBreadcrumbs = (function() {
+      try {
+        return JSON.parse(localStorage.wasBreadcrumbs || false);
+      } catch (error) {
+        console.error(error);
+        return false
+      }
+    })();
   
     localStorage.wasBreadcrumbs = isBreadcrumbs;
 
@@ -72,16 +81,14 @@
         "duration-300",
       );
       setTimeout(function() {
-        if (true) {
-          navbarBreadcrumbsListWrapper.classList.remove(
-            "h-0",
-            "opacity-0",
-          );
-          navbarBreadcrumbsListWrapper.classList.add(
-            "h-6",
-            "opacity-100"
-          );
-        }
+        navbarBreadcrumbsListWrapper.classList.remove(
+          "h-0",
+          "opacity-0",
+        );
+        navbarBreadcrumbsListWrapper.classList.add(
+          "h-6",
+          "opacity-100"
+        );
       });
     }
   
