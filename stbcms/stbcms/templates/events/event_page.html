@@ -2,7 +2,34 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-<h1 class="font-mono text-2xl">
-  {{ page.title }}
-</h1>
+<section class="max-w-4xl flex justify-center">
+  <div class="space-y-6 p-4 ">
+    <h1 class="font-semibold text-4xl">
+      {{ page.title }}
+    </h1>
+    <div>
+      <h3 class="font-semibold">Date &amp; Time</h3>
+      <div>TBD</div>
+    </div>
+    <div>
+      <h3 class="font-semibold">Location</h3>
+      {% if page.location_link %}
+      <a href="{{ page.location_link }}" target="_blank" rel="noopener noreferrer">
+        {{ page.location_description }}
+      </a>
+      {% else %}
+      <div>
+        {{ page.location_description }}
+      </div>
+      {% endif %}
+    </div>
+    <div>
+      <h3 class="font-semibold">Details</h3>
+      <div class="prose prose-p:my-2 prose-p:leading-tight prose-li:my-0 prose-ul:my-0 prose-ol:my-0 dark:prose-invert">
+        {{ page.detail_description | richtext }}
+      </div>
+
+    </div>
+  </div>
+</section>
 {% endblock %}

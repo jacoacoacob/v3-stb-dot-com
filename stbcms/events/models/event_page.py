@@ -11,8 +11,6 @@ from wagtail.admin.panels import FieldPanel
 from blocks.models import ComplexDateTimeBlock
 
 
-
-
 class EventStartEndBlock(StructBlock):
   start = ComplexDateTimeBlock()
   end = ComplexDateTimeBlock()
