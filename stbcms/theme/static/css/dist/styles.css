@@ -1824,7 +1824,7 @@ select {
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
-  z-index: 50;
+  z-index: 30;
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -1902,9 +1902,18 @@ select {
 }
 
 .mobile-menu {
+  position: fixed;
+  top: 0px;
+  z-index: 40;
   display: none;
+  height: 100%;
+  width: 100%;
   --tw-bg-opacity: 1;
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
@@ -1920,12 +1929,7 @@ html.mobile-menu-open {
 }
 
 html.mobile-menu-open .mobile-menu {
-  position: absolute;
-  top: 0px;
-  z-index: 40;
   display: block;
-  height: 100%;
-  width: 100%;
 }
 
 @tailwind utilities;
@@ -2030,6 +2034,10 @@ html.mobile-menu-open .mobile-menu {
 
 .justify-center {
   justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
 }
 
 .space-y-10 > :not([hidden]) ~ :not([hidden]) {

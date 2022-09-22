@@ -26,12 +26,12 @@
         {% tailwind_css %}
     </head>
 
-    <body class="bg-white dark:bg-slate-800 dark:text-slate-200">
+    <body class="bg-white dark:bg-slate-800 dark:text-slate-200 relative">
         {% wagtailuserbar %}
 
         {% navbar %}
 
-        <main class="site-full-height flex justify-center ">
+        <main class="site-full-height flex justify-center">
             <div class="flex-1  max-w-7xl">
                 {% block content %}{% endblock %}
             </div>
