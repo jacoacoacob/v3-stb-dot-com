@@ -8,6 +8,9 @@
     border border-slate-400 rounded 
     outline-none;
   }
+  .button-xs {
+    @apply px-2 py-1 text-sm;
+  }
   .button-sm {
     @apply px-2 py-1;
   }

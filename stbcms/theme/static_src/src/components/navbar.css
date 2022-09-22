@@ -3,37 +3,82 @@
 @layer components {
   .navbar {
     @apply 
-    sticky top-0 z-50
-    bg-white dark:bg-slate-800
-    w-full
-    transition-all
+  bg-white
+  dark:bg-slate-800
     flex
-    flex-col justify-between items-center
+    flex-col
+    items-center
+    justify-between
+    sticky
+    top-0
+    z-50
+    w-full
   }
   .navbar-content {
-    @apply flex-1 w-full flex justify-between items-center max-w-7xl px-4 py-1;
+    @apply
+    flex
+    flex-1
+    items-center 
+    justify-between
+    max-w-7xl
+    w-full
+    px-4
+    py-1;
   }
   .navbar-breadcrumbs {
-    @apply flex justify-center w-full;
+    @apply
+    flex
+    justify-center
+    w-full;
   }
   .navbar-breadcrumbs-list-wrapper {
     @apply
+    border-b-2
+    border-dashed
+  border-slate-300
+  dark:border-slate-600
+    flex
+    justify-center
     w-full
-    flex justify-center
-    border-b-2 border-slate-300 dark:border-slate-600 border-dashed;
   }
   .navbar-breadcrumbs-list {
     @apply
-      flex
-      flex-1
-      space-x-2
-      max-w-7xl
-      font-mono
-      text-slate-600
-      dark:text-slate-400
-      text-xs
-      px-4;
+  dark:text-slate-400
+    flex
+    flex-1
+    flex-wrap
+    font-mono
+    max-w-7xl
+    px-4
+    space-x-2
+  text-slate-600
+    text-xs
   }
+
+
+  .mobile-menu {
+    @apply
+    hidden
+    transition-all
+    bg-slate-100
+    dark:bg-slate-900
+  }
+
+  html.mobile-menu-open {
+    @apply
+    overflow-hidden
+  }
+
+  html.mobile-menu-open .mobile-menu {
+    @apply
+    block
+    absolute
+    top-0
+    z-40
+    h-full
+    w-full
+  }
+
 
 }
 

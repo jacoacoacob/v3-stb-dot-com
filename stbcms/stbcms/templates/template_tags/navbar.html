@@ -2,7 +2,7 @@
 {% get_settings use_default_site=True %}
 
 {% with settings=settings.core.SiteSettings %}
-<header class="navbar transition-all">
+<header class="navbar">
   <div class="navbar-content">
     <div class="flex items-center space-x-2">
       <a href="/">
@@ -11,7 +11,7 @@
         </h1>
       </a>
     </div>
-    <div class="flex items-center space-x-6 text-lg">
+    <div class="hidden sm:flex items-center space-x-6 text-lg">
       <nav>
         <ul class="flex space-x-6">
           {% for is_active, page in pages %}
@@ -33,23 +33,70 @@
         </span>
       </button>
     </div>
+    <div class="sm:hidden">
+      <button id="menu-toggle" class="relative z-50 button button-xs border-green-500 dark:border-green-600">
+        Menu
+      </button>
+    </div>
   </div>
   <div class="navbar-breadcrumbs">
     <div class="navbar-breadcrumbs-list-wrapper">
       <ul class="navbar-breadcrumbs-list">
         {% for page in breadcrumbs %}
           <li>
-            <a href="{% pageurl page %}" class="{% if forloop.last %}font-semibold{% endif %}">
+            <a href="{% pageurl page %}" class="{% if forloop.last %}font-semibold{% endif %} inline-block">
               {{ page.title }}
             </a>
           </li>
-          {% if not forloop.last %}<span class="font-thin">/</span>{% endif %}
+          {% if not forloop.last %}<span class="font-thin inline-block">/</span>{% endif %}
         {% endfor%}
       </ul>
     </div>
   </div>
 </header>
+
+<section id="mobile-menu" class="mobile-menu">
+
+</section>
+
 {% endwith %}
+<script type="text/javascript">
+  (function() {
+    var btnToggleMenu = document.getElementById("menu-toggle");
+    var mobileMenu = document.getElementById("mobile-menu");
+
+    var machine = {
+      state: "closed",
+      toggle: function() {
+        this.state = this.state === "closed" ? "open" : "closed";
+      },
+      actions: {
+        closed: function() {
+          console.log("Menu is closed");
+          document.documentElement.classList.remove(
+            "mobile-menu-open"
+          );
+        },
+        open: function() {
+          console.log("Menu is open");
+          document.documentElement.classList.add(
+            "mobile-menu-open"
+          );
+        },
+      },
+      tick: function() {
+        this.actions[this.state]()
+      },
+    };
+
+    machine.tick();
+
+    btnToggleMenu.addEventListener("click", function(event) {
+      machine.toggle();
+      machine.tick();
+    });
+  })();
+</script>
 <script type="text/javascript">
   (function() {
     var isBreadcrumbs = "{{ is_breadcrumbs }}" === "True";
@@ -75,7 +122,6 @@
     if (isBreadcrumbs && !wasBreadcrumbs) {
       navbarBreadcrumbsListWrapper.classList.add(
         "h-0",
-        "opacity-0",
         "overflow-hidden",
         "transition-all",
         "duration-300",
@@ -87,13 +133,9 @@
         );
         navbarBreadcrumbsListWrapper.classList.add(
           "h-6",
-          "opacity-100"
         );
       });
     }
-  
-    console.log("isBreadcrumbs", isBreadcrumbs);
-    console.log("wasBreadcrumbs", wasBreadcrumbs);
   })();
 </script>
 <script type="text/javascript">
