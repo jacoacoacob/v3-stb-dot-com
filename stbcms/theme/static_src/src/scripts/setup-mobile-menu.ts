@@ -6,7 +6,7 @@ function setupMobileMenu(navbar: HTMLElement) {
   const btnMenuOpen = qs("#mobile-menu-open");
   const btnMenuClose = qs("#mobile-menu-close");
 
-  const [trapFocus, releaseFocus] = useTrapFocus(navbar, "[data-mobile-menu-focusable='true']");
+  const [trapFocus, releaseFocus] = useTrapFocus(navbar, "[data-mobile-menu-focusable]");
 
   const menuMachine = {
     state: "closed",

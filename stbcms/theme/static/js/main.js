@@ -48,7 +48,7 @@ function $fb83284f3c7078af$export$206640e88214a215(container, selector) {
 function $41ec8bf5c226cc99$export$933baf54561e84b4(navbar) {
     var btnMenuOpen = (0, $ad7d1ff078b161d2$export$836aee6bce45247)("#mobile-menu-open");
     var btnMenuClose = (0, $ad7d1ff078b161d2$export$836aee6bce45247)("#mobile-menu-close");
-    var _a = (0, $fb83284f3c7078af$export$206640e88214a215)(navbar, "[data-mobile-menu-focusable='true']"), trapFocus = _a[0], releaseFocus = _a[1];
+    var _a = (0, $fb83284f3c7078af$export$206640e88214a215)(navbar, "[data-mobile-menu-focusable]"), trapFocus = _a[0], releaseFocus = _a[1];
     var menuMachine = {
         state: "closed",
         toggleState: function() {

@@ -2,13 +2,13 @@
 
 <section id="mobile-menu" class="mobile-menu space-y-4">
   <div class="flex flex-col h-full items-center justify-center space-y-8 text-center">
-      <a href="/">
+      <a href="/" data-mobile-menu-focusable>
         <h1 class="font-bold font-mono text-3xl">{{ settings.brand_name }}</h1>
       </a>
       <ul class="space-y-4 text-3xl">
         {% for is_active, page in pages %}
         <li class="{% if is_active %}font-bold text-green-500{% endif %}">
-          <a href="{{ page.url }}" data-mobile-menu-focusable="true" class="inline-block transition-all scale-100 hover:scale-110 focus:scale-110">
+          <a href="{{ page.url }}" data-mobile-menu-focusable class="inline-block transition-all scale-100 hover:scale-110 focus:scale-110">
             {{ page.title }}
           </a>
         </li>
@@ -16,14 +16,14 @@
       </ul>
       <div class="flex flex-col items-center space-y-4">
         <button
-          data-mobile-menu-focusable="true"
+          data-mobile-menu-focusable
           id="mobile-menu-close"
           class="button font-mono font-bold text-sm text-slate-700 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 transition-all scale-100 hover:scale-105 focus:scale-105"
         >
           Close Menu
         </button>
         <button
-          data-mobile-menu-focusable="true"
+          data-mobile-menu-focusable
           data-toggle-dark-mode
           id="mobile-menu-appearance"
           class="rounded-full p-2 font-mono border text-sm border-slate-400  text-slate-700 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 transition-all scale-100 hover:scale-105 focus:scale-105"
