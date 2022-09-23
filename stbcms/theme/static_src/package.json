@@ -2,28 +2,38 @@
   "name": "theme",
   "version": "3.4.0",
   "description": "",
+  "source": "src/scripts/main.ts",
+  "main": "../static/js/main.js",
   "scripts": {
-    "start": "npm run dev",
-    "build": "npm run build:clean && npm run build:tailwind",
+    "start": "concurrently \"npm run dev:tailwind\" \"npm run dev:ts\"",
+    "build": "npm run build:clean && npm run build:tailwind && npm run build:ts",
     "build:clean": "rimraf ../static/css/dist",
-    "build:tailwind": "cross-env NODE_ENV=production tailwindcss --postcss -i ./src/styles.css -o ../static/css/dist/styles.css --minify",
-    "dev": "cross-env NODE_ENV=development tailwindcss --postcss -i ./src/styles.css -o ../static/css/dist/styles.css -w",
+    "build:tailwind": "cross-env NODE_ENV=production tailwindcss --postcss -i ./src/styles/styles.css -o ../static/css/dist/styles.css --minify",
+    "build:ts": "parcel build",
+    "dev:tailwind": "cross-env NODE_ENV=development tailwindcss --postcss -i ./src/styles/styles.css -o ../static/css/dist/styles.css -w",
+    "dev:ts": "parcel watch",
     "tailwindcss": "node ./node_modules/tailwindcss/lib/cli.js"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@parcel/packager-ts": "^2.7.0",
+    "@parcel/transformer-typescript-tsc": "^2.7.0",
+    "@parcel/transformer-typescript-types": "^2.7.0",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/line-clamp": "^0.4.0",
     "@tailwindcss/typography": "^0.5.2",
+    "concurrently": "^7.4.0",
     "cross-env": "^7.0.3",
+    "parcel": "^2.7.0",
     "postcss": "^8.4.14",
     "postcss-import": "^14.1.0",
     "postcss-nested": "^5.0.6",
     "postcss-simple-vars": "^6.0.3",
     "rimraf": "^3.0.2",
-    "tailwindcss": "^3.1.6"
+    "tailwindcss": "^3.1.6",
+    "typescript": "^4.8.3"
   }
 }
