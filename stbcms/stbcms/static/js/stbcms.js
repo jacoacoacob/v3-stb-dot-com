@@ -110,9 +110,10 @@ function useMobileMenu(navbar) {
   btnMenuOpen.addEventListener("click", event => {
     menuMachine.setState("open");
   });
+
   btnMenuClose.addEventListener("click", event => {
     menuMachine.setState("closed");
-  })
+  });
 }
 
 function useNavbar() {
@@ -120,7 +121,5 @@ function useNavbar() {
 
   useMobileMenu(navbar);
 }
-
-console.log("Hello from stbcms.js", location.href);
 
 useNavbar();

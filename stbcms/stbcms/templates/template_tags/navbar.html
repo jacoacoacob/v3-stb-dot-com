@@ -88,11 +88,13 @@
 <script type="text/javascript">
   (function () {
     var toggleDarkMode = document.getElementById("toggle-dark-mode");
+    var mobileMenuToggleDarkMode = document.getElementById("mobile-menu-appearance")
     var moonIcon = document.getElementById("toggle-dark-mode-dark-icon-wrapper");
     var sunIcon = document.getElementById("toggle-dark-mode-light-icon-wrapper");
 
     if (toggleDarkMode) {
       toggleDarkMode.addEventListener("click", onToggleDarkMode);
+      mobileMenuToggleDarkMode.addEventListener("click", onToggleDarkMode);
     }
 
     function getIsDarkMode() {
