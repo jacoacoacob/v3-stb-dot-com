@@ -66,8 +66,7 @@
     z-40
     h-full
     w-full
-    transition-all
-    bg-slate-100
+    bg-white
     dark:bg-slate-900
   }
 
@@ -76,7 +75,7 @@
   }
 
   html.mobile-menu-open .mobile-menu {
-    @apply block
+    @apply block sm:hidden;
   }
 }
 

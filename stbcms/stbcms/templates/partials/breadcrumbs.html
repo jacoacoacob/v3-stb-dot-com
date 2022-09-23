@@ -1,0 +1,16 @@
+{% load wagtailcore_tags %}
+
+<div class="navbar-breadcrumbs">
+  <div class="navbar-breadcrumbs-list-wrapper">
+    <ul class="navbar-breadcrumbs-list">
+      {% for page in breadcrumbs %}
+        <li>
+          <a href="{% pageurl page %}" class="{% if forloop.last %}font-semibold{% endif %} inline-block">
+            {{ page.title }}
+          </a>
+        </li>
+        {% if not forloop.last %}<span class="font-thin inline-block">/</span>{% endif %}
+      {% endfor%}
+    </ul>
+  </div>
+</div>

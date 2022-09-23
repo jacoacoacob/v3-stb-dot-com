@@ -2,7 +2,7 @@
 {% get_settings use_default_site=True %}
 
 {% with settings=settings.core.SiteSettings %}
-<header class="navbar">
+<header class="navbar" id="navbar">
   <div class="navbar-content">
     <div class="flex items-center space-x-2">
       <a href="/">
@@ -34,83 +34,16 @@
       </button>
     </div>
     <div class="sm:hidden">
-      <button id="mobile-menu-open" class="z-50 button button-xs border-green-500 dark:border-green-600">
+      <button id="mobile-menu-open" class="button button-xs font-mono text-sm font-bold text-slate-700 bg-slate-50 dark:bg-slate-700 dark:text-slate-100">
         Menu
       </button>
     </div>
   </div>
-  <div class="navbar-breadcrumbs">
-    <div class="navbar-breadcrumbs-list-wrapper">
-      <ul class="navbar-breadcrumbs-list">
-        {% for page in breadcrumbs %}
-          <li>
-            <a href="{% pageurl page %}" class="{% if forloop.last %}font-semibold{% endif %} inline-block">
-              {{ page.title }}
-            </a>
-          </li>
-          {% if not forloop.last %}<span class="font-thin inline-block">/</span>{% endif %}
-        {% endfor%}
-      </ul>
-    </div>
-  </div>
+  {% include "partials/breadcrumbs.html" %}
+  {% include "partials/mobile-menu.html"  %}
 </header>
-
-<section id="mobile-menu" class="mobile-menu">
-  <div class="flex justify-between">
-    <h1>Mobile Menu</h1>
-    <button id="mobile-menu-close" class="button button-xs border-green-500 dark:border-green-600">
-      Close
-    </button>
-  </div>
-</section>
-
 {% endwith %}
-<script type="text/javascript">
-  (function() {
-    var btnOpen = document.getElementById("mobile-menu-open");
-    var btnClose = document.getElementById("mobile-menu-close");
-    var mobileMenu = document.getElementById("mobile-menu");
 
-    var menuMachine = {
-      state: "closed",
-      setState: function(openOrClosed) {
-        this.state = openOrClosed;
-        this.tick();
-      },
-      actions: {
-        closed: function() {
-          console.log("Menu is closed");
-          document.documentElement.classList.remove(
-            "mobile-menu-open"
-          );
-        },
-        open: function() {
-          console.log("Menu is open");
-          document.documentElement.classList.add(
-            "mobile-menu-open"
-          );
-        },
-      },
-      tick: function() {
-        this.actions[this.state]()
-      },
-    };
-
-    menuMachine.tick();
-
-    btnClose.addEventListener("click", function() {
-      menuMachine.setState("closed");
-    });
-    btnOpen.addEventListener("click", function() {
-      menuMachine.setState("open");
-    });
-
-    btnToggleMenu.addEventListener("click", function(event) {
-      menuMachine.toggle();
-      menuMachine.tick();
-    });
-  })();
-</script>
 <script type="text/javascript">
   (function() {
     var isBreadcrumbs = "{{ is_breadcrumbs }}" === "True";

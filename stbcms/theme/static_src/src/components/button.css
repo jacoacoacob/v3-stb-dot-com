@@ -6,7 +6,6 @@
     inline-block 
     px-4 py-2 
     border border-slate-400 rounded 
-    outline-none;
   }
   .button-xs {
     @apply px-2 py-1 text-sm;
@@ -24,7 +23,7 @@
   .button-shadow,
   .button-shadow-sm,
   .button-shadow-lg {
-    @apply transition-shadow;
+    @apply transition-shadow outline-none
   }
 
   .button-shadow-sm:hover,
