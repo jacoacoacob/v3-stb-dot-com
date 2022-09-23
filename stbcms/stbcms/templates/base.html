@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailuserbar tailwind_tags stbcms_menus %}
+{% load static wagtailcore_tags wagtailuserbar tailwind_tags stbcms_menus stbcms_scripts %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +40,7 @@
 
         {% footer %}
 
-        <script src="{% static '/js/stbcms.js' %}"></script>
+        {% stbcms_scripts %}
 
     </body>
 </html>

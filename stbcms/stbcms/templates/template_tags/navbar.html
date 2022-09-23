@@ -24,13 +24,12 @@
         </ul>
       </nav>
       <span class="font-thin">|</span>
-      <button id="toggle-dark-mode" title="Toggle light/dark mode">
-        <span id="toggle-dark-mode-dark-icon-wrapper">
-          {% icon "moon" class="h-4 w-5" %}
-        </span>
-        <span id="toggle-dark-mode-light-icon-wrapper">
-          {% icon "sun" class="h-5 w-5" %}
-        </span>
+      <button
+        id="toggle-dark-mode"
+        title="Toggle light/dark mode"
+      >
+        {% icon "moon" class="hidden dark:inline h-5 w-5" %}
+        {% icon "sun" class="dark:hidden inline h-5 w-5" %}
       </button>
     </div>
     <div class="sm:hidden">
@@ -89,8 +88,6 @@
   (function () {
     var toggleDarkMode = document.getElementById("toggle-dark-mode");
     var mobileMenuToggleDarkMode = document.getElementById("mobile-menu-appearance")
-    var moonIcon = document.getElementById("toggle-dark-mode-dark-icon-wrapper");
-    var sunIcon = document.getElementById("toggle-dark-mode-light-icon-wrapper");
 
     if (toggleDarkMode) {
       toggleDarkMode.addEventListener("click", onToggleDarkMode);
@@ -114,12 +111,8 @@
       var html = document.querySelector("html");
       if (getIsDarkMode()) {
         html.classList.add("dark");
-        moonIcon.style.display = "inline";
-        sunIcon.style.display = "none";
       } else {
         html.classList.remove("dark");
-        moonIcon.style.display = "none";
-        sunIcon.style.display = "inline";
       }
     }
 
