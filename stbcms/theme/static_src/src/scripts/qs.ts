@@ -1,10 +1,10 @@
 
-function qs(selector: string): HTMLElement | null {
-  return document.querySelector(selector);
+function qs(selector: string, element?: Element): HTMLElement | null {
+  return element ? element.querySelector(selector) : document.querySelector(selector);
 }
 
-function qsAll(selector: string): NodeListOf<HTMLElement> {
-  return document.querySelectorAll(selector);
+function qsAll(selector: string, element?: Element): NodeListOf<HTMLElement> {
+  return element ? element.querySelectorAll(selector) : document.querySelectorAll(selector);
 }
 
 export { qs, qsAll };

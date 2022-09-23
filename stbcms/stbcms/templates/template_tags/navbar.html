@@ -26,6 +26,7 @@
       <span class="font-thin">|</span>
       <button
         id="toggle-dark-mode"
+        data-toggle-dark-mode=""
         title="Toggle light/dark mode"
       >
         {% icon "moon" class="hidden dark:inline h-5 w-5" %}
@@ -44,81 +45,7 @@
 {% endwith %}
 
 <script type="text/javascript">
-  (function() {
-    var isBreadcrumbs = "{{ is_breadcrumbs }}" === "True";
-    var wasBreadcrumbs = (function() {
-      try {
-        return JSON.parse(localStorage.wasBreadcrumbs || false);
-      } catch (error) {
-        console.error(error);
-        return false
-      }
-    })();
-  
-    localStorage.wasBreadcrumbs = isBreadcrumbs;
-
-    var navbarBreadcrumbs = document.querySelector(".navbar-breadcrumbs");
-    var navbarBreadcrumbsList = document.querySelector(".navbar-breadcrumbs-list");
-    var navbarBreadcrumbsListWrapper = document.querySelector(".navbar-breadcrumbs-list-wrapper");
-
-    if (isBreadcrumbs) {
-      navbarBreadcrumbs.classList.add("h-6");
-    }
-
-    if (isBreadcrumbs && !wasBreadcrumbs) {
-      navbarBreadcrumbsListWrapper.classList.add(
-        "h-0",
-        "overflow-hidden",
-        "transition-all",
-        "duration-300",
-      );
-      setTimeout(function() {
-        navbarBreadcrumbsListWrapper.classList.remove(
-          "h-0",
-          "opacity-0",
-        );
-        navbarBreadcrumbsListWrapper.classList.add(
-          "h-6",
-        );
-      });
-    }
-  })();
+  window.CMS_NAVBAR_DATA = {
+    isBreadcrumbs:  "{{ is_breadcrumbs }}" === "True"
+  };
 </script>
-<script type="text/javascript">
-  (function () {
-    var toggleDarkMode = document.getElementById("toggle-dark-mode");
-    var mobileMenuToggleDarkMode = document.getElementById("mobile-menu-appearance")
-
-    if (toggleDarkMode) {
-      toggleDarkMode.addEventListener("click", onToggleDarkMode);
-      mobileMenuToggleDarkMode.addEventListener("click", onToggleDarkMode);
-    }
-
-    function getIsDarkMode() {
-      return localStorage.getItem("dark-mode") === "true";
-    }
-
-    function setIsDarkMode(bool) {
-      localStorage.setItem("dark-mode", JSON.stringify(bool));
-    }
-
-    function onToggleDarkMode() {
-      setIsDarkMode(!getIsDarkMode());
-      updateUI();
-    }
-
-    function updateUI() {
-      var html = document.querySelector("html");
-      if (getIsDarkMode()) {
-        html.classList.add("dark");
-      } else {
-        html.classList.remove("dark");
-      }
-    }
-
-    updateUI();
-  })();
-</script>
-
-{% comment %}
-{% endcomment %}
