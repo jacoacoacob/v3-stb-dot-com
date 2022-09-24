@@ -1853,30 +1853,33 @@ select {
 }
 
 .navbar-breadcrumbs {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 2.5rem;
   display: flex;
   width: 100%;
   justify-content: center;
+  border-bottom-width: 1px;
+  border-style: dashed;
+  --tw-border-opacity: 1;
+  border-color: rgb(203 213 225 / var(--tw-border-opacity));
+  background-color: transparent;
+}
+
+.dark .navbar-breadcrumbs {
+  --tw-border-opacity: 1;
+  border-color: rgb(71 85 105 / var(--tw-border-opacity));
 }
 
 .navbar-breadcrumbs-list-wrapper {
   display: flex;
   width: 100%;
-  justify-content: center;
-  border-bottom-width: 2px;
-  border-style: dashed;
-  --tw-border-opacity: 1;
-  border-color: rgb(203 213 225 / var(--tw-border-opacity));
-}
-
-.dark .navbar-breadcrumbs-list-wrapper {
-  --tw-border-opacity: 1;
-  border-color: rgb(71 85 105 / var(--tw-border-opacity));
+  max-width: 80rem;
 }
 
 .navbar-breadcrumbs-list {
   display: flex;
   max-width: 80rem;
-  flex: 1 1 0%;
   flex-wrap: wrap;
 }
 
@@ -1887,8 +1890,10 @@ select {
 }
 
 .navbar-breadcrumbs-list {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   padding-left: 1rem;
-  padding-right: 1rem;
+  padding-right: 0.5rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 0.75rem;
   line-height: 1rem;
@@ -1897,8 +1902,17 @@ select {
 }
 
 .dark .navbar-breadcrumbs-list {
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 41 59 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(148 163 184 / var(--tw-text-opacity));
+}
+
+@media (min-width: 640px) {
+  .navbar-breadcrumbs-list {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
 }
 
 .mobile-menu {

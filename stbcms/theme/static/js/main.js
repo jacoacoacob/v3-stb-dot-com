@@ -112,32 +112,6 @@ function $41ec8bf5c226cc99$export$933baf54561e84b4(navbar) {
 
 
 
-function $2863376820e24a25$export$24c208de4fde1b2a() {
-    var _a;
-    var isBreadcrumbs = Boolean((_a = window.CMS_NAVBAR_DATA) === null || _a === void 0 ? void 0 : _a.isBreadcrumbs);
-    var wasBreadcrumbs = function() {
-        try {
-            return JSON.parse(localStorage.wasBreadcrumbs || false);
-        } catch (error) {
-            console.error(error);
-            return false;
-        }
-    }();
-    localStorage.wasBreadcrumbs = isBreadcrumbs;
-    var bc = (0, $ad7d1ff078b161d2$export$836aee6bce45247)(".navbar-breadcrumbs");
-    var bcListWrapper = (0, $ad7d1ff078b161d2$export$836aee6bce45247)(".navbar-breadcrumbs-list-wrapper");
-    if (isBreadcrumbs) bc.classList.add("h-6");
-    if (isBreadcrumbs && !wasBreadcrumbs) {
-        bcListWrapper.classList.add("h-0", "overflow-hidden", "transition-all", "duration-300");
-        setTimeout(function() {
-            bcListWrapper.classList.remove("h-0", "opacity-0");
-            bcListWrapper.classList.add("h-6");
-        });
-    }
-}
-
-
-
 
 function $0266d94240c51ce7$export$bd9e94318d9c1a25() {
     function getIsDarkMode() {
@@ -171,7 +145,7 @@ function $0266d94240c51ce7$export$bd9e94318d9c1a25() {
 
 
 var $65e27a733c7607bf$var$navbar = (0, $ad7d1ff078b161d2$export$836aee6bce45247)("#navbar");
-(0, $2863376820e24a25$export$24c208de4fde1b2a)();
+// setupBreadcrumbs();
 var $65e27a733c7607bf$var$cleanupMobileMenuListeners = (0, $41ec8bf5c226cc99$export$933baf54561e84b4)($65e27a733c7607bf$var$navbar);
 var $65e27a733c7607bf$var$cleanupToggleDarkmodeListeners = (0, $0266d94240c51ce7$export$bd9e94318d9c1a25)();
 window.addEventListener("beforeunload", function() {

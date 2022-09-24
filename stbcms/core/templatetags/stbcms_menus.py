@@ -36,11 +36,11 @@ def footer():
 @register.inclusion_tag("template_tags/navbar.html", takes_context=True)
 def navbar(context: RequestContext):
   current_page: Page = context.get("self")
-  if not current_page or current_page.depth <= 2:
+  if not current_page or current_page.depth <= 3:
     breadcrumbs = []
   elif current_page:
     breadcrumbs = Page.objects.ancestor_of(current_page, inclusive=True)
-  breadcrumbs = breadcrumbs[1:]
+  breadcrumbs = breadcrumbs[2:]
   return {
     "pages": [(is_page_active(context, page), page) for page in get_main_site_pages()],
     "breadcrumbs": breadcrumbs,

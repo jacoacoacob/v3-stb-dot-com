@@ -2,11 +2,13 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-<ul>
-  {% for page in page.get_children.live %}
-  <li>
-    <a href="{% pageurl page %}">{{ page.title }}</a>
-  </li>
-  {% endfor %}
-</ul>
+<section class="flex justify-center site-full-height p-4">
+  <ul>
+    {% for page in page.get_children.live %}
+    <li>
+      <a href="{% pageurl page %}">{{ page.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
 {% endblock %}
