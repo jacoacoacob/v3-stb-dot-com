@@ -2,7 +2,7 @@
 
 @layer utilities {
   .site-full-height {
-    @apply min-h-[calc(100vh-50px)];
+    @apply min-h-[calc(100vh-40px)];
   }
   .site-half-height {
     @apply min-h-[calc(50vh-50px)];

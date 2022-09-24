@@ -29,6 +29,7 @@ function setupMobileMenu(navbar: HTMLElement) {
         document.documentElement.classList.add(
           "mobile-menu-open"
         );
+        btnMenuClose.focus();
         trapFocus();
       },
     },

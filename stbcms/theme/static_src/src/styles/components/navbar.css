@@ -4,7 +4,7 @@
   .navbar {
     @apply 
   bg-white
-  dark:bg-slate-800
+  dark:bg-slate-900
     flex
     flex-col
     items-center
@@ -48,7 +48,7 @@
   .navbar-breadcrumbs-list {
     @apply
   dark:text-slate-400
-  dark:bg-slate-800
+  dark:bg-slate-900
   bg-white
     flex
     flex-wrap
@@ -58,8 +58,7 @@
     pr-2
     space-x-2
     text-slate-600
-    text-xs
-    sm:text-sm
+    text-sm
   }
 
 

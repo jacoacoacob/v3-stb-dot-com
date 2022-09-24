@@ -1,7 +1,7 @@
 .footer {
   @apply
   py-10 space-y-4
-  bg-slate-100 dark:bg-slate-900
+  bg-slate-100 dark:bg-slate-800
   flex flex-col items-center
 }
 .footer__icon-link {

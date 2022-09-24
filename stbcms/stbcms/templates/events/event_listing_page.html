@@ -2,13 +2,30 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-<section class="flex justify-center site-full-height p-4">
-  <ul>
-    {% for page in page.get_children.live %}
-    <li>
-      <a href="{% pageurl page %}">{{ page.title }}</a>
-    </li>
-    {% endfor %}
-  </ul>
+<section class="flex justify-center site-full-height">
+  <div class="max-w-2xl flex-1 p-4">
+    <ul class="space-y-8">
+      {% for event in upcoming_events %}
+      <li>
+        <a href="{% pageurl event %}" class="card card--fancy">
+          <div class="space-y-3">
+            <h2 class="font-semibold text-4xl">
+              {{ event.title }}
+            </h2>
+            <div>
+              When
+            </div>
+            <div class="">
+              {{ event.listing_description }}
+            </div>
+            <p class="font-mono font-semibold text-sm text-slate-600 dark:text-slate-300">
+              click for more
+            </p>
+          </div>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 </section>
 {% endblock %}

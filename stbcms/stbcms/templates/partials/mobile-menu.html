@@ -14,14 +14,7 @@
         </li>
         {% endfor %}
       </ul>
-      <div class="flex flex-col items-center space-y-4">
-        <button
-          data-mobile-menu-focusable
-          id="mobile-menu-close"
-          class="button font-mono font-bold text-sm text-slate-700 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 transition-all scale-100 hover:scale-105 focus:scale-105"
-        >
-          Close Menu
-        </button>
+      <!-- <div class="flex flex-col items-center space-y-4"> -->
         <button
           data-mobile-menu-focusable
           data-toggle-dark-mode
@@ -31,7 +24,13 @@
           {% icon "moon" class="hidden dark:inline h-5 w-5" %}
           {% icon "sun" class="dark:hidden inline h-5 w-5" %}
         </button>
-      </div>
-
+        <button
+          data-mobile-menu-focusable
+          id="mobile-menu-close"
+          class="button font-mono font-bold text-sm text-slate-700 bg-slate-50 dark:bg-slate-700 dark:text-slate-100 transition-all scale-100 hover:scale-105 focus:scale-105"
+        >
+          Close Menu
+        </button>
+      <!-- </div> -->
   </div>
 </section>

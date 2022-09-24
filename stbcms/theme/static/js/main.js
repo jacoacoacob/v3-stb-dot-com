@@ -66,6 +66,7 @@ function $41ec8bf5c226cc99$export$933baf54561e84b4(navbar) {
             },
             open: function() {
                 document.documentElement.classList.add("mobile-menu-open");
+                btnMenuClose.focus();
                 trapFocus();
             }
         },

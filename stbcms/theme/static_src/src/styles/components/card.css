@@ -1,0 +1,31 @@
+@tailwind components;
+
+@layer components {
+  .card {
+    @apply
+    block
+    rounded
+    p-4
+    w-full
+    border
+    border-transparent
+    transition-all
+    duration-100
+  }
+  .card--fancy:hover,
+  .card--fancy:focus {
+    border: 1px solid theme("colors.green.500");
+    border-left-style: dashed;
+    border-top-style: dashed;
+    box-shadow: 5px 5px 0 theme("colors.green.600"),
+                10px 10px 0 theme("colors.green.400");
+  }
+  .dark .card--fancy:hover,
+  .dark .card--fancy:focus {
+    border-color: theme("colors.teal.800");
+    box-shadow: 5px 5px 0 theme("colors.green.900"),
+                10px 10px 0 theme("colors.green.700");
+  }
+
+
+}
