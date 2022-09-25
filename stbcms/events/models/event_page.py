@@ -1,20 +1,14 @@
-from ast import List
+
 import uuid
 
 from django.db import models
 
 from wagtail.fields import RichTextField, StreamField
-from wagtail.blocks import StreamBlock, StructBlock, ListBlock
+from wagtail.blocks import ListBlock
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 
-from blocks.models import ComplexDateTimeBlock
-
-
-class EventStartEndBlock(StructBlock):
-  start = ComplexDateTimeBlock()
-  end = ComplexDateTimeBlock()
-
+from blocks.models import ComplexDateTimeRangeBlock
 
 
 class EventPage(Page):
@@ -29,8 +23,16 @@ class EventPage(Page):
   )
   when = StreamField(
     [
-      ("current", EventStartEndBlock(label="Currently scheduled for...")),
-      ("previous", ListBlock(EventStartEndBlock(), label="Previously scheduled for..."))
+      ("current", ComplexDateTimeRangeBlock(label="Currently scheduled for...")),
+      (
+        "previous",
+        ListBlock(
+          ComplexDateTimeRangeBlock(
+            label="Previously scheduled date/time"
+          ),
+          label="Previously scheduled for..."
+        )
+      )
     ],
     blank=True,
     block_counts={ "current": { "min_num": 1, "max_num": 1 } },
@@ -41,6 +43,7 @@ class EventPage(Page):
     blank=True,
     help_text="If provided, this link will be embedded in the location description text"
   )
+  list_as_upcoming = models.BooleanField(blank=True, default=False)
   include_contact_link = models.BooleanField(default=True)
   ts_created = models.DateTimeField(
     auto_created=True,
@@ -54,6 +57,7 @@ class EventPage(Page):
   content_panels = Page.content_panels + [
     FieldPanel("listing_description"),
     FieldPanel("detail_description"),
+    FieldPanel("list_as_upcoming"),
     FieldPanel("when"),
     FieldPanel("location_description"),
     FieldPanel("location_link"),
@@ -62,6 +66,18 @@ class EventPage(Page):
 
   parent_page_types = ["events.EventListingPage"]
   subpage_types = []
+
+  @property
+  def countdown_status(self):
+    return self.when.first_block_by_name("current").value.countdown_status(self.list_as_upcoming)
+
+  @property
+  def countdown_status_message(self):
+    return self.when.first_block_by_name("current").value.countdown_status_message(self.list_as_upcoming)
+
+  @property
+  def when_message(self):
+    return self.when.first_block_by_name("current").value.message()
 
   def clean(self):
     self.slug = str(self.uid_slug)
