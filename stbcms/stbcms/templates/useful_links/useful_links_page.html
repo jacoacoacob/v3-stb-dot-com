@@ -1,1 +1,15 @@
 {% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<section class="flex justify-center w-full h-full pb-8">
+  <div class="max-w-2xl flex-1 p-4">
+    <ul>
+      {% for link in links %}
+        {% include "useful_links/useful_link_list_item.html" with link=link %}
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+{% endblock %}

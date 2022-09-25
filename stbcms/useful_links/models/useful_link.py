@@ -24,6 +24,10 @@ class UsefulLink(Indexed, ClusterableModel):
   link_url = models.URLField(unique=True)
   link_text = models.CharField(max_length=140)
   description = models.TextField(max_length=2000, blank=True)
+  is_live = models.BooleanField(
+    default=False,
+    help_text="This link will not appear to site visitors unless this box is checked"
+  )
   ts_created = models.DateTimeField(
     auto_created=True,
     auto_now_add=True,
@@ -51,6 +55,7 @@ class UsefulLink(Indexed, ClusterableModel):
       heading="Details",
       classname="collapsible"
     ),
+    FieldPanel("is_live"),
     MultiFieldPanel(
       [
         FieldPanel("categories", heading="Categories (type)"),

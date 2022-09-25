@@ -1,9 +1,10 @@
-
 from django.db import models
 
 from django_extensions.db.fields import AutoSlugField
 
-from taggit.models import TagBase
+from modelcluster.fields import ParentalKey
+
+from taggit.models import ItemBase, TagBase
 
 from wagtail.search.index import Indexed, SearchField
 from wagtail.snippets.models import register_snippet
@@ -23,3 +24,15 @@ class UsefulLinkCategory(Indexed, TagBase):
     verbose_name = "Useful Link Category"
     verbose_name_plural = "Useful Link Categories"
   
+
+class UsefulLinkCategories(ItemBase):
+  tag = models.ForeignKey(
+    UsefulLinkCategory,
+    related_name="categorized_useful_links",
+    on_delete=models.CASCADE
+  )
+  content_object = ParentalKey(
+    to="useful_links.UsefulLink",
+    related_name="categorized_items",
+    on_delete=models.CASCADE
+  )

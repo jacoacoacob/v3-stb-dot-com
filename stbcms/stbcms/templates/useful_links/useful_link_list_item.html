@@ -1,0 +1,24 @@
+{% load icon %}
+
+<li>
+  <a href="{{ link.link_url }}" target="_blank" rel="noopener noreferrer" class="card card-dense card-fancy">
+    <h3 class="text-xl font-semibold">
+      {{ link.link_text}} {% icon "external-link" class="inline h-5 -translate-y-[2px]" %}
+    </h3>
+    <p>
+      {{ link.description }}
+    </p>
+    {% comment %}
+    {% for tag in link.tags.all %}
+    <span class="badge text-xs">
+      {{ tag.name }}
+    </span>
+    {% endfor %}
+    {% for category in link.categories.all %}
+    <span class="badge">
+      {{ category.name }}
+    </span>
+    {% endfor %}
+    {% endcomment %}
+  </a>
+</li>
