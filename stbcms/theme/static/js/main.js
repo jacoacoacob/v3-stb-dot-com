@@ -1,13 +1,13 @@
-function $ad7d1ff078b161d2$export$836aee6bce45247(selector, element) {
+function $2477b0e0305ba15a$export$836aee6bce45247(selector, element) {
     return element ? element.querySelector(selector) : document.querySelector(selector);
 }
-function $ad7d1ff078b161d2$export$d32deb6b670bc3a1(selector, element) {
+function $2477b0e0305ba15a$export$d32deb6b670bc3a1(selector, element) {
     return element ? element.querySelectorAll(selector) : document.querySelectorAll(selector);
 }
 
 
 
-function $e0f7025c70ae0285$export$90fc3a17d93f704c(elem, type, listener) {
+function $f9fc0a4307b9ed89$export$90fc3a17d93f704c(elem, type, listener) {
     function setup() {
         elem.addEventListener(type, listener);
     }
@@ -19,23 +19,23 @@ function $e0f7025c70ae0285$export$90fc3a17d93f704c(elem, type, listener) {
         teardown
     ];
 }
-function $e0f7025c70ae0285$export$57aaedcb6bd3df60(element, type, listener) {
-    return $e0f7025c70ae0285$export$90fc3a17d93f704c(element, type, listener);
+function $f9fc0a4307b9ed89$export$57aaedcb6bd3df60(element, type, listener) {
+    return $f9fc0a4307b9ed89$export$90fc3a17d93f704c(element, type, listener);
 }
 
 
 
 
-function $fb83284f3c7078af$export$206640e88214a215(container, selector) {
-    var focusableElements = (0, $ad7d1ff078b161d2$export$d32deb6b670bc3a1)(selector);
-    var focusCursor = 0;
+function $993b902bec18bac8$export$206640e88214a215(container, selector) {
+    const focusableElements = (0, $2477b0e0305ba15a$export$d32deb6b670bc3a1)(selector);
+    let focusCursor = 0;
     function increment() {
         focusCursor = focusCursor + 1 > focusableElements.length - 1 ? 0 : focusCursor + 1;
     }
     function decrement() {
         focusCursor = focusCursor - 1 < 0 ? focusableElements.length - 1 : focusCursor - 1;
     }
-    return (0, $e0f7025c70ae0285$export$57aaedcb6bd3df60)(container, "keydown", function(event) {
+    return (0, $f9fc0a4307b9ed89$export$57aaedcb6bd3df60)(container, "keydown", (event)=>{
         if (event.key === "Tab") {
             event.shiftKey ? decrement() : increment();
             focusableElements[focusCursor].focus();
@@ -45,37 +45,37 @@ function $fb83284f3c7078af$export$206640e88214a215(container, selector) {
 }
 
 
-function $41ec8bf5c226cc99$export$933baf54561e84b4(navbar) {
-    var btnMenuOpen = (0, $ad7d1ff078b161d2$export$836aee6bce45247)("#mobile-menu-open");
-    var btnMenuClose = (0, $ad7d1ff078b161d2$export$836aee6bce45247)("#mobile-menu-close");
-    var _a = (0, $fb83284f3c7078af$export$206640e88214a215)(navbar, "[data-mobile-menu-focusable]"), trapFocus = _a[0], releaseFocus = _a[1];
-    var menuMachine = {
+function $777da45f9e4654b7$export$933baf54561e84b4(navbar) {
+    const btnMenuOpen = (0, $2477b0e0305ba15a$export$836aee6bce45247)("#mobile-menu-open");
+    const btnMenuClose = (0, $2477b0e0305ba15a$export$836aee6bce45247)("#mobile-menu-close");
+    const [trapFocus, releaseFocus] = (0, $993b902bec18bac8$export$206640e88214a215)(navbar, "[data-mobile-menu-focusable]");
+    const menuMachine = {
         state: "closed",
-        toggleState: function() {
+        toggleState () {
             this.state = this.state === "closed" ? "open" : "closed";
             this.tick();
         },
-        setState: function(newState) {
+        setState (newState) {
             this.state = newState;
             this.tick();
         },
         actions: {
-            closed: function() {
+            closed () {
                 document.documentElement.classList.remove("mobile-menu-open");
                 releaseFocus();
             },
-            open: function() {
+            open () {
                 document.documentElement.classList.add("mobile-menu-open");
                 btnMenuClose.focus();
                 trapFocus();
             }
         },
-        tick: function() {
+        tick () {
             this.actions[this.state]();
         }
     };
-    var unlisteners = [];
-    var _b = (0, $e0f7025c70ae0285$export$90fc3a17d93f704c)(window, "focus", closeMenu), listenWindowFocus = _b[0], unlistenWindowFocus = _b[1];
+    const unlisteners = [];
+    const [listenWindowFocus, unlistenWindowFocus] = (0, $f9fc0a4307b9ed89$export$90fc3a17d93f704c)(window, "focus", closeMenu);
     listenWindowFocus();
     unlisteners.push(unlistenWindowFocus);
     function closeMenu() {
@@ -95,18 +95,15 @@ function $41ec8bf5c226cc99$export$933baf54561e84b4(navbar) {
             btnMenuClose,
             "closed"
         ]
-    ].forEach(function(_a) {
-        var element = _a[0], state = _a[1];
-        var _b = (0, $e0f7025c70ae0285$export$90fc3a17d93f704c)(element, "click", function() {
+    ].forEach(([element, state])=>{
+        const [listen, unlisten] = (0, $f9fc0a4307b9ed89$export$90fc3a17d93f704c)(element, "click", ()=>{
             menuMachine.setState(state);
-        }), listen = _b[0], unlisten = _b[1];
+        });
         listen();
         unlisteners.push(unlisten);
     });
     function cleanupListeners() {
-        unlisteners.forEach(function(unlisten) {
-            return unlisten();
-        });
+        unlisteners.forEach((unlisten)=>unlisten());
     }
     return cleanupListeners;
 }
@@ -114,7 +111,7 @@ function $41ec8bf5c226cc99$export$933baf54561e84b4(navbar) {
 
 
 
-function $0266d94240c51ce7$export$bd9e94318d9c1a25() {
+function $e2f8619e108b5746$export$bd9e94318d9c1a25() {
     function getIsDarkMode() {
         return localStorage.getItem("dark-mode") === "true";
     }
@@ -130,28 +127,26 @@ function $0266d94240c51ce7$export$bd9e94318d9c1a25() {
         else document.documentElement.classList.remove("dark");
     }
     updateUI();
-    var unlisteners = [];
-    (0, $ad7d1ff078b161d2$export$d32deb6b670bc3a1)("[data-toggle-dark-mode]").forEach(function(element) {
-        var _a = (0, $e0f7025c70ae0285$export$90fc3a17d93f704c)(element, "click", onToggleDarkMode), listen = _a[0], unlisten = _a[1];
+    const unlisteners = [];
+    (0, $2477b0e0305ba15a$export$d32deb6b670bc3a1)("[data-toggle-dark-mode]").forEach((element)=>{
+        const [listen, unlisten] = (0, $f9fc0a4307b9ed89$export$90fc3a17d93f704c)(element, "click", onToggleDarkMode);
         listen();
         unlisteners.push(unlisten);
     });
     function cleanupListeners() {
-        unlisteners.forEach(function(unlisten) {
-            return unlisten();
-        });
+        unlisteners.forEach((unlisten)=>unlisten());
     }
     return cleanupListeners;
 }
 
 
-var $65e27a733c7607bf$var$navbar = (0, $ad7d1ff078b161d2$export$836aee6bce45247)("#navbar");
+const $1ab88a2c134b3f01$var$navbar = (0, $2477b0e0305ba15a$export$836aee6bce45247)("#navbar");
 // setupBreadcrumbs();
-var $65e27a733c7607bf$var$cleanupMobileMenuListeners = (0, $41ec8bf5c226cc99$export$933baf54561e84b4)($65e27a733c7607bf$var$navbar);
-var $65e27a733c7607bf$var$cleanupToggleDarkmodeListeners = (0, $0266d94240c51ce7$export$bd9e94318d9c1a25)();
-window.addEventListener("beforeunload", function() {
-    $65e27a733c7607bf$var$cleanupMobileMenuListeners();
-    $65e27a733c7607bf$var$cleanupToggleDarkmodeListeners();
+const $1ab88a2c134b3f01$var$cleanupMobileMenuListeners = (0, $777da45f9e4654b7$export$933baf54561e84b4)($1ab88a2c134b3f01$var$navbar);
+const $1ab88a2c134b3f01$var$cleanupToggleDarkmodeListeners = (0, $e2f8619e108b5746$export$bd9e94318d9c1a25)();
+window.addEventListener("beforeunload", ()=>{
+    $1ab88a2c134b3f01$var$cleanupMobileMenuListeners();
+    $1ab88a2c134b3f01$var$cleanupToggleDarkmodeListeners();
 });
 
 

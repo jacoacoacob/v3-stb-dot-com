@@ -6,7 +6,10 @@ from django.utils import timezone
 
 class DateTimeSegments:
   def __init__(self, dt: datetime, time_override: str | None) -> None:
-    dt_str = timezone.localtime(dt).strftime("%A__%B %d__%Y__%I:%M__%p__%Z")
+    # dt_str = timezone.localtime(dt).strftime("%A__%B %d__%Y__%I:%M__%p__%Z")
+    ### Use the abbreviated datetime format to allow for display in one line
+    ### in event_page and event_listing_page template
+    dt_str = timezone.localtime(dt).strftime("%a__%b %d__%Y__%I:%M__%p__%Z")
     day_of_week, month_and_date, year, hours_minutes, am_pm, tz_name = [
       x.strip() for x in dt_str.split("__")
     ]
@@ -103,10 +106,12 @@ def complex_date_time_range_message(
     end_date_time_override,
     end_time_override,
   )
-  if parts:
+  if type(parts) == dict:
     start = parts.get("start")
     end = parts.get("end")
     if start and end:
       return f"{start} - {end}"
     return start or end
+  elif type(parts) == str:
+    return parts
   return "TBD"

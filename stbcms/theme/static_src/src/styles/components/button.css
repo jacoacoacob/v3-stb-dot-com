@@ -8,16 +8,16 @@
     border border-slate-400 rounded 
   }
   .button-xs {
-    @apply px-2 py-1 text-sm;
+    @apply button px-2 py-1 text-sm;
   }
   .button-sm {
-    @apply px-2 py-1;
+    @apply button px-2 py-1;
   }
   .button-lg {
-    @apply px-6 py-2 text-xl;
+    @apply button px-6 py-2 text-xl;
   }
   .button-xl {
-    @apply px-8 py-3 text-xl;
+    @apply button px-8 py-3 text-xl;
   }
 
   .button-shadow,
