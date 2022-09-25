@@ -5,7 +5,7 @@
 {# We should add twitter:card and other social meta tags to head here #}
 
 {% block content %}
-<section class="w-full flex justify-center">
+<section class="flex justify-center w-full h-full pb-8">
   <div class="max-w-2xl flex-1 space-y-6 p-4">
     <h1 class="font-semibold text-4xl">
       {{ page.title }}
@@ -43,6 +43,8 @@
     </div>
     {% if page.include_contact_link %}
     <div class="space-x-1 sm:space-x-2">
+      {% comment %}
+      {# NOT_IMPLEMENTED: See https://gitlab.com/soc-fem/wagtail-stb-dot-com/-/issues/8 #}
       <a
         href="https://twitter.com/intent/tweet?url={{ page.full_url }}&text=I'm going to this!"
         target="_blank"
@@ -51,7 +53,7 @@
       >
         Share on Twitter {% icon "twitter" class="inline-block -translate-y-[2px] h-4 w-4 ml-1" %}
       </a>
-
+      {% endcomment %}
       <a
         href="mailto:{{ settings.core.SiteSettings.email }}?subject=RE: Event - {{ page.title }}"
         target="_blank"

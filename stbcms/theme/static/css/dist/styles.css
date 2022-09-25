@@ -1978,8 +1978,12 @@ html.mobile-menu-open .mobile-menu {
   transition-duration: 100ms;
 }
 
-.card--fancy:hover,
-  .card--fancy:focus {
+.card-dense {
+  padding: 0.5rem;
+}
+
+.card-fancy:hover,
+  .card-fancy:focus {
   border: 1px solid #22c55e;
   border-left-style: dashed;
   border-top-style: dashed;
@@ -1987,8 +1991,8 @@ html.mobile-menu-open .mobile-menu {
                 10px 10px 0 #4ade80;
 }
 
-.dark .card--fancy:hover,
-  .dark .card--fancy:focus {
+.dark .card-fancy:hover,
+  .dark .card-fancy:focus {
   border-color: #115e59;
   box-shadow: 5px 5px 0 #115e59,
                 10px 10px 0 #0d9488;
@@ -2168,12 +2172,6 @@ html.mobile-menu-open .mobile-menu {
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
-.space-y-6 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
-}
-
 .space-y-3 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
@@ -2184,6 +2182,12 @@ html.mobile-menu-open .mobile-menu {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
+}
+
+.space-y-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
 
 .space-y-8 > :not([hidden]) ~ :not([hidden]) {
@@ -2233,6 +2237,16 @@ html.mobile-menu-open .mobile-menu {
   background-color: rgb(248 250 252 / var(--tw-bg-opacity));
 }
 
+.bg-cyan-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 211 238 / var(--tw-bg-opacity));
+}
+
+.bg-orange-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 146 60 / var(--tw-bg-opacity));
+}
+
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
@@ -2258,6 +2272,10 @@ html.mobile-menu-open .mobile-menu {
 
 .p-2 {
   padding: 0.5rem;
+}
+
+.pb-8 {
+  padding-bottom: 2rem;
 }
 
 .text-center {
@@ -2291,11 +2309,6 @@ html.mobile-menu-open .mobile-menu {
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
-
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
 }
 
 .text-3xl {

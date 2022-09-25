@@ -12,16 +12,22 @@
     transition-all
     duration-100
   }
-  .card--fancy:hover,
-  .card--fancy:focus {
+
+  .card-dense {
+    @apply p-2;
+  }
+
+  .card-fancy:hover,
+  .card-fancy:focus {
     border: 1px solid theme("colors.green.500");
     border-left-style: dashed;
     border-top-style: dashed;
     box-shadow: 5px 5px 0 theme("colors.green.600"),
                 10px 10px 0 theme("colors.green.400");
   }
-  .dark .card--fancy:hover,
-  .dark .card--fancy:focus {
+
+  .dark .card-fancy:hover,
+  .dark .card-fancy:focus {
     border-color: theme("colors.teal.800");
     box-shadow: 5px 5px 0 theme("colors.teal.800"),
                 10px 10px 0 theme("colors.teal.600");
