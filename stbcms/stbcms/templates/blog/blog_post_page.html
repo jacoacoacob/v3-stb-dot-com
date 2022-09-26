@@ -1,9 +1,39 @@
 {% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-<section class="flex justify-center w-full h-full pb-8">
-  <div class="max-w-2xl flex-1 p-4">
-
+<section class="flex justify-center w-full h-full pb-8 pt-2 sm:pt-4">
+  <div class="max-w-2xl flex-1 p-4 space-y-4">
+    <h1 class="text-3xl font-bold">
+      {{ page.title }}
+    </h1>
+    <div class="text-sm font-mono font-bold text-slate-500 dark:text-slate-400">
+      {{ page.ts_updated | date:"F jS Y" }}
+    </div>
+    <div class="space-y-4">
+      {% for block in page.body %}
+      <section>
+        {% if block.block_type == "photo" %}
+          {% with image_block=block.value.image caption_block=block.value.caption %}
+            <picture>
+              {% image image_block width-672 format-webp-lossless as webp_img %}
+              {% image image_block width-672 format-jpeg as jpeg_img %}
+              <source srcset="{{ webp_img.url }}" type="image/webp">
+              <source srcset="{{ jpeg_img.url }}" type="image/jpeg">
+              <img src="{{ jpeg_img.url }}" alt="{{ jpeg_img.alt }}">
+            </picture>
+            <span class="text-xs sm:text-sm">
+              {{ caption_block }}
+            </span>
+          {% endwith%}
+        {% elif block.block_type == "text" %}
+          <div class="prose dark:prose-invert">
+            {{ block.value }}
+          </div>
+        {% endif %}
+      </section>
+      {% endfor %}
+    </div>
   </div>
 </section>
 {% endblock %}

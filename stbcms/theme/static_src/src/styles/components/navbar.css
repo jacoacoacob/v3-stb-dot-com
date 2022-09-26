@@ -37,6 +37,7 @@
     border-dashed
     border-slate-300
     dark:border-slate-600
+    pb-1
   }
   .navbar-breadcrumbs-list-wrapper {
     @apply
@@ -52,13 +53,13 @@
   bg-white
     flex
     flex-wrap
-    font-mono
     max-w-7xl
     pl-4
     pr-2
     space-x-2
     text-slate-600
-    text-sm
+    text-xs
+    sm:text-sm
   }
 
 

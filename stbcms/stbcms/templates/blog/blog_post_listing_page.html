@@ -3,11 +3,9 @@
 {% block content %}
 <section class="flex justify-center w-full h-full pb-8">
   <div class="max-w-2xl flex-1 p-4">
-    <ul>
-      {% for blog_post in page.get_children.live %}
-        <li>
-          {{ blog_post.title }}
-        </li>
+    <ul class="space-y-6">
+      {% for post in blog_posts %}
+        {% include "blog/blog_post_listing_page_list_item.html" %}
       {% endfor %}
     </ul>
   </div>

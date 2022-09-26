@@ -10,6 +10,6 @@ class UsefulLinkAdmin(ModelAdmin):
   menu_order = 200
   add_to_settings_menu = False
   exclude_from_explorer = False
-  list_display = ("link_text", "ts_created", "ts_updated")
-  list_filter = ("categories", "tags", "ts_created", "ts_updated")
+  list_display = ("link_text", "is_live", "ts_created", "ts_updated")
+  list_filter = ("is_live", "categories", "tags", "ts_created", "ts_updated")
   search_fields = ("link_url", "link_text", "description")
