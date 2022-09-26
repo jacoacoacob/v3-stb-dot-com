@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 
-
 {% block content %}
-<ul>
-  {% for blog_post in page.get_children.live %}
-    <li>
-      {{ blog_post.title }}
-    </li>
-  {% endfor %}
-</ul>
+<section class="flex justify-center w-full h-full pb-8">
+  <div class="max-w-2xl flex-1 p-4">
+    <ul>
+      {% for blog_post in page.get_children.live %}
+        <li>
+          {{ blog_post.title }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
 {% endblock %}
