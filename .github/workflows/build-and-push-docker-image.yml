@@ -24,9 +24,9 @@ jobs:
     - name: Build docker image
       env:
         DIGITALOCEAN_REGISTRY_NAME: ${{ secrets.DIGITALOCEAN_REGISTRY_NAME }}
-        # IMAGE_TAG_HASH: echo $GITHUB_SHA | head -c7
-        # IMAGE_TAG: 
-      run: docker build -t '${DIGITALOCEAN_REGISTRY_NAME}/stbcms:$(echo $GITHUB_SHA | head -c7)' stbcms
+        IMAGE_TAG_HASH: echo $GITHUB_SHA | head -c7
+        IMAGE_TAG: $DIGITALOCEAN_REGISTRY_NAME/stbcms:$IMAGE_TAG_HASH
+      run: docker build -t '${IMAGE_TAG}' stbcms
       # run: docker build -t '$DIGITALOCEAN_REGISTRY_NAME/stbcms:$(echo $GITHUB_SHA | head -c7)' stbcms
       
     - name: Log in to DigitalOcean Container Registry with short-lived credentials
