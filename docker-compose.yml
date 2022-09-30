@@ -6,7 +6,7 @@ services:
     container_name: v3_stbcms_nginx
     restart: unless-stopped
     env_file:
-      - ~/config/v3-stbcms/.env
+      - .env.prod
     volumes:
       - ./nginx-conf:/etc/nginx/templates:ro
       - /etc/letsencrypt:/etc/letsencrypt
@@ -19,7 +19,7 @@ services:
     image: ${WAGTAIL_IMAGE}
     restart: unless-stopped
     env_file:
-      - ~/config/v3-stbcms/.env
+      - .env.prod
     ports:
       - 8000:8000
   certbot:
