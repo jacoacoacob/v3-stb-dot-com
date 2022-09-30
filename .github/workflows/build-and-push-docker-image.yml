@@ -24,7 +24,7 @@ jobs:
     - name: Build docker image
       env:
         DIGITALOCEAN_REGISTRY_NAME: ${{ secrets.DIGITALOCEAN_REGISTRY_NAME }}
-      run: docker build -t $DIGITALOCEAN_REGISTRY_NAME/stbcms:$(echo $GITHUB_SHA | head -c7) stbcms
+      run: docker build -t '$DIGITALOCEAN_REGISTRY_NAME/stbcms:$(echo $GITHUB_SHA | head -c7)' stbcms
       
     - name: Log in to DigitalOcean Container Registry with short-lived credentials
       run: doctl registry login --expire-seconds 1200
