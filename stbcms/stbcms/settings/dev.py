@@ -18,11 +18,11 @@ INTERNAL_IPS = [
 INSTALLED_APPS += [
     "tailwind",
     "theme",
-    # "django_browser_reload",
+    "django_browser_reload",
     "debug_toolbar",
 ]
 MIDDLEWARE += [
-    # "django_browser_reload.middleware.BrowserReloadMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 # End setup `django-tailwind`
