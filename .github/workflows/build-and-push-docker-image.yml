@@ -1,0 +1,31 @@
+name: Build and push to DigitalOcean Container Registry
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout main branch
+      uses: actions/checkout@main
+
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        
+    - name: Build docker image
+      run: docker build -t ${{ secrets.REGISTRY_NAME }}/stbcms:$(echo $GITHUB_SHA | head -c7) stbcms
+      
+    - name: Log in to DigitalOcean Container Registry with short-lived credentials
+      run: doctl registry login --expire-seconds 1200
+      
+    - name: Push image to DigitalOcean Container Registry
+      run: docker push ${{ secrets.REGISTRY_NAME }}/stbcms:$(echo $GITHUB_SHA | head -c7)
