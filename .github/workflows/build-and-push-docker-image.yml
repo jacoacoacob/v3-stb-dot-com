@@ -21,7 +21,6 @@ jobs:
       with:
         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-
     - name: Build docker image
       env:
         DIGITALOCEAN_REGISTRY_NAME: ${{ secrets.DIGITALOCEAN_REGISTRY_NAME }}
