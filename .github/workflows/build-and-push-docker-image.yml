@@ -4,11 +4,11 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - "stbcms"
+      - "stbcms/**"
   pull_request:
     branches: [ "main" ]
     paths:
-      - "stbcms"
+      - "stbcms/**"
 
 jobs:
 
