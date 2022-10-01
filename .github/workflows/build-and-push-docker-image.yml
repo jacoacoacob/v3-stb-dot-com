@@ -3,8 +3,12 @@ name: Build and push to DigitalOcean Container Registry
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - "stbcms"
   pull_request:
     branches: [ "main" ]
+    paths:
+      - "stbcms"
 
 jobs:
 
