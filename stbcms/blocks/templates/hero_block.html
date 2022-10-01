@@ -10,22 +10,24 @@
     <div class="prose dark:prose-invert prose-2xl">
       {{ value.cta.text | richtext }}
     </div>
-    <a
-      href="{{ value.cta.link.href }}"
-      {% if value.cta.link.is_external %}
-      target="_blank"
-      rel="noopener noreferrer"
-      {% endif %}
-      class="button button-xl button-shadow-lg"
-    >
-      <div class="flex items-center space-x-1">
-        <span class="text-2xl">
-          {{ value.cta.link.text }}
-        </span>
-        {% if value.cta.link.is_external %}
-          {% icon "external-link" class="h-5 w-5" %}
+    {% for cta_link in value.cta.links %}
+      <a
+        href="{{ cta_link.href }}"
+        {% if cta_link.is_external %}
+        target="_blank"
+        rel="noopener noreferrer"
         {% endif %}
-      </div>
-    </a>
+        class="button button-xl button-shadow-lg"
+      >
+        <div class="flex items-center space-x-1">
+          <span class="text-2xl">
+            {{ cta_link.text }}
+          </span>
+          {% if cta_link.is_external %}
+            {% icon "external-link" class="h-5 w-5" %}
+          {% endif %}
+        </div>
+      </a>
+    {% endfor %}
   </article>
 </div>
