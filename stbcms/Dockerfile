@@ -63,10 +63,16 @@ RUN python manage.py collectstatic --noinput --clear
 #   Wagtail instance can be started with a simple "docker run" command.
 # CMD set -xe; python manage.py migrate --noinput; gunicorn stbcms.wsgi:application
 
-# https://pythonspeed.com/articles/gunicorn-in-docker/
+# https://pythonspeed.com/articles/gunicorn-in-docker/ AND https://medium.com/building-the-system/gunicorn-3-means-of-concurrency-efbb547674b7
+# `workers` = a sub process with its own memory
+# `threads` = spawned by each worker and share memory
+# maximum_concurrent_requests = `workers` * `threads`
+# 
+# Recommended number of workers is `(2 * CPUs) + 1`
+# Recommended max_concurrent_requests is also `(2 * CPUs) + 1`
 CMD gunicorn \
     --worker-tmp-dir /dev/shm \
     --workers=2 \
-    --threads=4 \
+    --threads=2 \
     --worker-class=gthread \
     stbcms.wsgi:application

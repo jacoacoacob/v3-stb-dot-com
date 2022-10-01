@@ -4,12 +4,11 @@
 {% block content %}
 <section class="flex justify-center w-full h-full pb-8">
   <div class="max-w-2xl flex-1 p-4">
-    <ul>
+    <ul class="space-y-6">
       {% for link in links %}
         {% include "useful_links/useful_link_list_item.html" with link=link %}
       {% endfor %}
     </ul>
   </div>
 </section>
-
 {% endblock %}
