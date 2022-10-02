@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.styleguide",
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.settings",
+    "wagtail.contrib.frontend_cache",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",

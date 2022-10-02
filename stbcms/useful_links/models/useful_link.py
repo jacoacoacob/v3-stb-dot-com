@@ -40,8 +40,8 @@ class UsefulLink(Indexed, ClusterableModel):
   )
 
   search_fields = [
-    SearchField("link_url", partial_match=True),
     SearchField("link_text", partial_match=True),
+    SearchField("link_url", partial_match=True),
     SearchField("description", partial_match=True)
   ]
 
