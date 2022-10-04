@@ -15,6 +15,7 @@
       <section>
         {% if block.block_type == "photo" %}
           {% with image_block=block.value.image caption_block=block.value.caption %}
+          <figure>
             <picture>
               {% image image_block width-672 format-webp-lossless as webp_img %}
               {% image image_block width-672 format-jpeg as jpeg_img %}
@@ -22,9 +23,10 @@
               <source srcset="{{ jpeg_img.url }}" type="image/jpeg">
               <img src="{{ jpeg_img.url }}" alt="{{ jpeg_img.alt }}">
             </picture>
-            <span class="text-xs sm:text-sm">
+            <figcaption class="text-xs sm:text-sm">
               {{ caption_block }}
-            </span>
+            </figcaption>
+          </figure>
           {% endwith%}
         {% elif block.block_type == "text" %}
           <div class="prose dark:prose-invert">
