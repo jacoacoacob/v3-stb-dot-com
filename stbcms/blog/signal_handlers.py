@@ -11,7 +11,7 @@ def purge_blog_post_listing_page_cache(blog_post_page: BlogPostPage):
   for blog_post_listing_page in BlogPostListingPage.objects.live():
     if blog_post_page in blog_post_listing_page.get_blog_posts():
       batch.add_page(blog_post_listing_page)
-  print("Purging BlogPostListingPage URLS:", batch.urls)
+  print("Purging BlogPostListingPage URLs:", batch.urls)
   batch.purge()
 
 
