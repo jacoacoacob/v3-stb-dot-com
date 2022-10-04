@@ -20,6 +20,7 @@ INSTALLED_APPS += [
     "theme",
     "django_browser_reload",
     "debug_toolbar",
+    "wagtail.contrib.styleguide",
 ]
 MIDDLEWARE += [
     "django_browser_reload.middleware.BrowserReloadMiddleware",
