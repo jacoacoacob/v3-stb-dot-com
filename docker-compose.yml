@@ -8,7 +8,7 @@ services:
     env_file:
       - .env.prod
     volumes:
-      - ./nginx-conf/nginx.cloudflare.conf.template:/etc/nginx/templates:ro
+      - ./nginx-conf/nginx.cloudflare.conf.template:/etc/nginx/templates/nginx.cloudflare.conf.template:ro
       - /etc/ssl/cloudflare:/etc/ssl/cloudflare
     ports:
       - 80:80
