@@ -5,10 +5,6 @@ on:
     branches: [ "main" ]
     paths:
       - "stbcms/**"
-  pull_request:
-    branches: [ "main" ]
-    paths:
-      - "stbcms/**"
 
 jobs:
 
