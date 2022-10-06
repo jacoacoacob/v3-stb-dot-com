@@ -11,7 +11,9 @@
       {% if has_upcoming_events %}
       <ul class="space-y-6">
         {% for event in upcoming_events %}
-        {% include "events/event_listing_page_list_item.html" with event=event %}
+        <a href="{{ event.url }}" class="card card-fancy card-dense">
+          {% include "partials/event_slim.html" with event=event %}
+        </a>
         {% endfor %}
       </ul>
       {% else %}
@@ -27,7 +29,9 @@
       </h2>
       <ul class="space-y-6">
         {% for event in past_events %}
-          {% include "events/event_listing_page_list_item.html" with event=event %}
+        <a href="{{ event.url }}" class="card card-fancy card-dense">
+          {% include "partials/event_slim.html" with event=event %}
+        </a>
         {% endfor %}
       </ul>
     </section>

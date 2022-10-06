@@ -1,0 +1,21 @@
+<div class="space-y-3">
+  <h2 class="font-semibold text-4xl">
+    {{ event.title }}
+  </h2>
+  <div class="space-y-1">
+    {% if event.countdown_status_message %}
+    <span class="badge">
+      {{ event.countdown_status_message }}
+    </span>
+    {% endif %}
+    <div class="font-bold text-sm text-slate-600 dark:text-slate-300">
+      {{ event.when_message }}
+    </div>
+  </div>
+  <div>
+    {{ event.listing_description }}
+  </div>
+  <p class="font-mono font-semibold text-sm text-slate-600 dark:text-slate-300">
+    click for more
+  </p>
+</div>

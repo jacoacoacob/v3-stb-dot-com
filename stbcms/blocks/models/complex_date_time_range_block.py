@@ -6,6 +6,7 @@ from django.forms.utils import ErrorList, ErrorDict
 from django.utils import timezone
 
 from wagtail.blocks import StructBlock, StructValue
+from wagtail.blocks.struct_block import StructBlockValidationError
 
 from ..helpers import complex_date_time_range_message
 from .complex_date_time_block import ComplexDateTimeBlock
@@ -111,7 +112,10 @@ class ComplexDateTimeRangeBlock(StructBlock):
     value_class = ComplexDateTimeRangeBlockValue
 
   # def clean(self, value):
-  #   errors = ErrorDict()
+  #   errors = ErrorDict({
+  #     "start": ErrorDict(),
+  #     "end": ErrorDict(),
+  #   })
 
   #   start = value.get("start")
   #   start_date_time = start.get("date_time")
@@ -120,14 +124,14 @@ class ComplexDateTimeRangeBlock(StructBlock):
 
   #   if start_date_time and end_date_time:
   #     if end_date_time <= start_date_time:
-  #       # errors["end"] = ErrorList(["The end must come after the start"])
-  #       errors["end"] = "The end must come after the start"
+  #       errors["end"]["date_time"] = ErrorList(["The end must come after the start"])
+  #       # errors["end"] = "The end must come after the start"
   #   elif end_date_time:
-  #     # errors["start"] = ErrorList(["There can be no end without a start"])
-  #     errors["start"] = "There can be no end without a start"
+  #     errors["start"]["date_time"] = ErrorList(["There can be no end without a start"])
+  #     # errors["start"] = "There can be no end without a start"
 
   #   if errors:
-  #     raise ValidationError("Validation Error in ComplexDateTimeRangeBlock", params=errors)
+  #     raise StructBlockValidationError(errors)
 
   #   return super().clean(value)
 

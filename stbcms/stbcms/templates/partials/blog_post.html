@@ -1,0 +1,37 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<div class="space-y-4 w-full">
+  <div class="space-y-2">
+    <div class="text-sm font-mono font-bold text-slate-500 dark:text-slate-400">
+      {{ post.ts_created | date:"F jS Y" }}
+    </div>
+    <h1 class="text-3xl font-bold">
+      {{ post.title }}
+    </h1>
+  </div>
+  <div class="space-y-4">
+    {% for block in post.body %}
+    <section>
+      {% if block.block_type == "photo" %}
+        {% with image_block=block.value.image caption_block=block.value.caption %}
+        <figure>
+          <picture>
+            {% image image_block width-672 format-webp-lossless as webp_img %}
+            {% image image_block width-672 format-jpeg as jpeg_img %}
+            <source srcset="{{ webp_img.url }}" type="image/webp">
+            <source srcset="{{ jpeg_img.url }}" type="image/jpeg">
+            <img src="{{ jpeg_img.url }}" alt="{{ jpeg_img.alt }}">
+          </picture>
+          <figcaption class="text-xs sm:text-sm">
+            {{ caption_block }}
+          </figcaption>
+        </figure>
+        {% endwith%}
+      {% elif block.block_type == "text" %}
+        <div class="prose dark:prose-invert">
+          {{ block.value }}
+        </div>
+      {% endif %}
+    </section>
+    {% endfor %}
+  </div>
+</div>

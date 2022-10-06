@@ -5,7 +5,11 @@
   <div class="max-w-2xl flex-1 p-4">
     <ul class="space-y-6">
       {% for post in blog_posts %}
-        {% include "blog/blog_post_listing_page_list_item.html" %}
+        <li>
+          <a href="{{ post.url }}" class="card card-fancy card-dense">
+            {% include "partials/blog_post_slim.html" with post=post %}
+          </a>
+        </li>
       {% endfor %}
     </ul>
   </div>
