@@ -1,5 +1,3 @@
-from django.db import models
-from django.forms import ValidationError
 from django.forms.utils import ErrorList
 
 from wagtail.admin.panels import FieldPanel
@@ -39,7 +37,13 @@ class HomePage(Page):
             ("article", RichTextBlock(features=["h2", "h3", "h4", "bold", "italic", "ol", "ul", "link"])),
             ("featured_pages", FeaturedPagesBlock())
         ],
+        block_counts={
+            "hero": { "min_num": 1, "max_num": 1 },
+            "article": { "max_num": 1 },
+            "featured_pages": { "max_num": 1 },
+        },
         blank=True,
+        collapsed=True,
         use_json_field=True
     )
 
