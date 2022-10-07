@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  db:
+    container_name: stbdb
+    restart: unless-stopped
+    image: postgres
+    volumes:
+      - local_stage_db_data:/var/lib/postgresql/data
+      - ./dev-database/local-stage-backup/:/tmp/backup
+      - ./dev-database/init.sh:/docker-entrypoint-initdb.d/init.sh
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=${POSTGRES_DB}
+  wagtail:
+    build: stbcms
+    restart: unless-stopped
+    env_file:
+      - .env.local-stage
+    ports:
+      - "8000:8000"
+      # - "587:587"
+
+
+volumes:
+  local_stage_db_data:
