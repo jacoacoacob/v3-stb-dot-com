@@ -61,7 +61,7 @@ class EventPage(Page):
     FieldPanel("when"),
     FieldPanel("location_description"),
     FieldPanel("location_link"),
-    FieldPanel("include_contact_link"),
+    # FieldPanel("include_contact_link"),
   ]
 
   parent_page_types = ["events.EventListingPage"]
