@@ -16,8 +16,8 @@ urlpatterns = [
     path("admin/iguanatrivialavenge/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
-    # path("robots.txt", RobotsView.as_view(), name="robots"),
-    # path("sitemap.xml", sitemap),
+    path("robots.txt", RobotsView.as_view(), name="robots"),
+    path("sitemap.xml", sitemap),
 ]
 
 

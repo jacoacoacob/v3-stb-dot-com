@@ -1,3 +1,4 @@
 {% load wagtailcore_tags %}{% wagtail_site as site %}User-Agent: *
+Disallow: /admin/
 
 Sitemap: {{ site.root_url }}/sitemap.xml
