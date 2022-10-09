@@ -5,7 +5,14 @@
   <section class="flex flex-col">
     {% for block in page.body %}
       {% if block.block_type == 'hero' %}
+      <div class="flex flex-col justify-center items-center w-full site-full-height p-4 relative">
         {% include_block block %}
+        {% if not page.disable_scroll_prompt %}
+          <button class="absolute bottom-4 p-2 rounded-full transition-colors hover:bg-slate-200 dark:hover:bg-slate-700 animate-bounce motion-reduce:animate-none">
+            {% icon "arrow-small-down" %}
+          </button>
+        {% endif %}
+      </div>
       {% elif block.block_type == 'article' %}
         <div class="relative flex justify-center items-center px-4 py-24">
           <div class="bg-slate-100 dark:bg-[#070a13] absolute h-full w-screen"></div>
