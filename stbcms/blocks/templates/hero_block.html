@@ -1,10 +1,14 @@
 {% load wagtailcore_tags wagtailimages_tags icon %}
+{% image value.cta.image %}
 
-<article class="max-w-2xl space-y-10">
-  <h1 class="text-8xl font-semibold bg-gradient-to-r from-green-500 to-teal-500  dark:from-teal-600 dark:to-teal-500 bg-clip-text text-transparent">
+<article class="max-w-2xl space-y-6 sm:space-y-10">
+  {% if value.cta.image %}
+
+  {% endif %}
+  <h1 class="text-5xl sm:text-8xl font-semibold bg-gradient-to-r from-green-500 to-teal-500  dark:from-teal-600 dark:to-teal-500 bg-clip-text text-transparent">
     {{ value.cta.heading }}
   </h1>
-  <div class="prose dark:prose-invert prose-2xl">
+  <div class="prose dark:prose-invert prose-xl sm:prose-2xl">
     {{ value.cta.text | richtext }}
   </div>
   {% for cta_link in value.cta.links %}
@@ -14,10 +18,10 @@
       target="_blank"
       rel="noopener noreferrer"
       {% endif %}
-      class="button button-xl button-shadow-lg"
+      class="button sm:button-xl button-shadow-lg"
     >
       <div class="flex items-center space-x-1">
-        <span class="text-2xl">
+        <span class="text-xl sm:text-2xl">
           {{ cta_link.text }}
         </span>
         {% if cta_link.is_external %}
