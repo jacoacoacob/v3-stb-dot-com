@@ -1,6 +1,8 @@
+from email.policy import default
+from django.db import models
 from django.forms.utils import ErrorList
 
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.blocks import RichTextBlock, PageChooserBlock, StructBlock
 from wagtail.blocks.struct_block import StructBlockValidationError
 from wagtail.models import Page
@@ -46,9 +48,19 @@ class HomePage(Page):
         collapsed=True,
         use_json_field=True
     )
+    disable_scroll_prompt = models.BooleanField(
+        default=False,
+        help_text="Check this box to hide the bouncing arrow that appears below the hero section."
+    )
 
     content_panels = Page.content_panels + [
-        FieldPanel("body")
+        FieldPanel("body"),
+        MultiFieldPanel(
+            [
+                FieldPanel("disable_scroll_prompt"),
+            ],
+            heading="Feature Flags"
+        )
     ]
 
     parent_page_types = []

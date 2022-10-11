@@ -1,32 +1,30 @@
-{% load wagtailcore_tags wagtailimages_tags icon %}
+{% load wagtailcore_tags icon %}
 
-
-<div class=" flex justify-center items-center w-full site-full-height p-4">
-  <article class="max-w-2xl space-y-10">
-    <h1 class="text-8xl font-semibold bg-gradient-to-r from-green-500 to-teal-500  dark:from-teal-600 dark:to-teal-500 bg-clip-text text-transparent">
-      {{ value.cta.heading }}
-    </h1>
-    <div class="prose dark:prose-invert prose-2xl">
-      {{ value.cta.text | richtext }}
-    </div>
-    {% for cta_link in value.cta.links %}
-      <a
-        href="{{ cta_link.href }}"
+<article class="max-w-2xl space-y-6 sm:space-y-10 ">
+  <h1 class="text-6xl sm:text-8xl font-semibold bg-gradient-to-r from-green-500 to-teal-500  dark:from-teal-600 dark:to-teal-500 bg-clip-text text-transparent">
+    {{ value.cta.heading }}
+  </h1>
+  <div class="prose dark:prose-invert prose-lg sm:prose-2xl">
+    {{ value.cta.text | richtext }}
+  </div>
+  {% for cta_link in value.cta.links %}
+    <a
+      href="{{ cta_link.href }}"
+      {% if cta_link.is_external %}
+      target="_blank"
+      rel="noopener noreferrer"
+      {% endif %}
+      class="button sm:button-xl button-shadow-lg"
+    >
+      <div class="flex items-center space-x-1">
+        <span class="text-xl sm:text-2xl">
+          {{ cta_link.text }}
+        </span>
         {% if cta_link.is_external %}
-        target="_blank"
-        rel="noopener noreferrer"
+          {% icon "external-link" class="h-5 w-5" %}
         {% endif %}
-        class="button button-xl button-shadow-lg"
-      >
-        <div class="flex items-center space-x-1">
-          <span class="text-2xl">
-            {{ cta_link.text }}
-          </span>
-          {% if cta_link.is_external %}
-            {% icon "external-link" class="h-5 w-5" %}
-          {% endif %}
-        </div>
-      </a>
-    {% endfor %}
-  </article>
-</div>
+      </div>
+    </a>
+  {% endfor %}
+</article>
+

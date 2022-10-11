@@ -140,13 +140,79 @@ function $e2f8619e108b5746$export$bd9e94318d9c1a25() {
 }
 
 
+
+
+function $a2f62d377d42522b$var$easeOut(currentFrame, start, distanceToTravelFromStart, totalFrames) {
+    return Math.round(-distanceToTravelFromStart * (currentFrame /= totalFrames) * (currentFrame - 2) + start);
+}
+function $a2f62d377d42522b$var$smoothScroll(options = {}, callback) {
+    const { totalFrames: _totalFrames , offset: _offset , targetSelector: targetSelector  } = options;
+    // There could be multiple elements that match selector or classname 'scroll-target' on the page.
+    // Select the first one.
+    const target = (0, $2477b0e0305ba15a$export$836aee6bce45247)(targetSelector ?? ".scroll-target");
+    if (!target) return;
+    const offset = _offset ?? 0;
+    const totalFrames = _totalFrames ?? 20;
+    const start = window.scrollY;
+    const final = target.getBoundingClientRect().top + start + offset;
+    const distanceToTravelFromStart = final - start;
+    let currentFrame = 0;
+    let animationY = $a2f62d377d42522b$var$easeOut(currentFrame, start, distanceToTravelFromStart, totalFrames);
+    let animationHandle;
+    // // Disabling This seems to always immediately cancel scroll on iPhone :(
+    // const [listenWindowScroll, forgetWindowScroll] = useEvent(window, "scroll", () => {
+    //   // if (animationY !== window.scrollY) {
+    //   //   cancelSroll(false);
+    //   //   alert("HUMAN SCROLLED!")
+    //   // }
+    // });
+    // listenWindowScroll();
+    function cancelSroll(didComplete) {
+        cancelAnimationFrame(animationHandle);
+        // forgetWindowScroll();
+        callback(didComplete);
+    }
+    // if (prefersReducedMotion()) {
+    //   window.scrollTo(0, final);
+    //   return;
+    // }
+    (function animateScroll() {
+        if (currentFrame === totalFrames) {
+            window.scrollTo(0, final);
+            cancelSroll(true);
+            return;
+        }
+        animationY = $a2f62d377d42522b$var$easeOut(currentFrame, start, distanceToTravelFromStart, totalFrames);
+        window.scrollTo(0, animationY);
+        currentFrame += 1;
+        animationHandle = requestAnimationFrame(animateScroll);
+    })();
+}
+function $a2f62d377d42522b$export$2a68c09ab2626bad() {
+    const scrollPromptButton = (0, $2477b0e0305ba15a$export$836aee6bce45247)("#btn-scroll-prompt");
+    if (!scrollPromptButton) console.warn("[setupScrollPromptButton] Couldn't find element using selector '#btn-scroll-prompt'");
+    const [listenClick, forgetClick] = (0, $f9fc0a4307b9ed89$export$90fc3a17d93f704c)(scrollPromptButton, "click", ()=>{
+        $a2f62d377d42522b$var$smoothScroll({
+            targetSelector: ".scroll-target",
+            offset: -80,
+            totalFrames: 40
+        }, (didComplete)=>{
+            console.log("[SmoothScroll::didComplete]", didComplete);
+        });
+    });
+    listenClick();
+    return forgetClick;
+}
+
+
 const $1ab88a2c134b3f01$var$navbar = (0, $2477b0e0305ba15a$export$836aee6bce45247)("#navbar");
-// setupBreadcrumbs();
 const $1ab88a2c134b3f01$var$cleanupMobileMenuListeners = (0, $777da45f9e4654b7$export$933baf54561e84b4)($1ab88a2c134b3f01$var$navbar);
 const $1ab88a2c134b3f01$var$cleanupToggleDarkmodeListeners = (0, $e2f8619e108b5746$export$bd9e94318d9c1a25)();
+const $1ab88a2c134b3f01$var$cleanupScrollPromptButton = (0, $a2f62d377d42522b$export$2a68c09ab2626bad)();
 window.addEventListener("beforeunload", ()=>{
     $1ab88a2c134b3f01$var$cleanupMobileMenuListeners();
     $1ab88a2c134b3f01$var$cleanupToggleDarkmodeListeners();
+    $1ab88a2c134b3f01$var$cleanupScrollPromptButton();
 });
 
 
