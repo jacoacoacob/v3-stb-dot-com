@@ -1,13 +1,13 @@
-function $ad7d1ff078b161d2$export$836aee6bce45247(selector, element) {
+function $2477b0e0305ba15a$export$836aee6bce45247(selector, element) {
     return element ? element.querySelector(selector) : document.querySelector(selector);
 }
-function $ad7d1ff078b161d2$export$d32deb6b670bc3a1(selector, element) {
+function $2477b0e0305ba15a$export$d32deb6b670bc3a1(selector, element) {
     return element ? element.querySelectorAll(selector) : document.querySelectorAll(selector);
 }
 
 
 
-function $e0f7025c70ae0285$export$90fc3a17d93f704c(elem, type, listener) {
+function $f9fc0a4307b9ed89$export$90fc3a17d93f704c(elem, type, listener) {
     function setup() {
         elem.addEventListener(type, listener);
     }
@@ -19,23 +19,23 @@ function $e0f7025c70ae0285$export$90fc3a17d93f704c(elem, type, listener) {
         teardown
     ];
 }
-function $e0f7025c70ae0285$export$57aaedcb6bd3df60(element, type, listener) {
-    return $e0f7025c70ae0285$export$90fc3a17d93f704c(element, type, listener);
+function $f9fc0a4307b9ed89$export$57aaedcb6bd3df60(element, type, listener) {
+    return $f9fc0a4307b9ed89$export$90fc3a17d93f704c(element, type, listener);
 }
 
 
 
 
-function $fb83284f3c7078af$export$206640e88214a215(container, selector) {
-    var focusableElements = (0, $ad7d1ff078b161d2$export$d32deb6b670bc3a1)(selector);
-    var focusCursor = 0;
+function $993b902bec18bac8$export$206640e88214a215(container, selector) {
+    const focusableElements = (0, $2477b0e0305ba15a$export$d32deb6b670bc3a1)(selector);
+    let focusCursor = 0;
     function increment() {
         focusCursor = focusCursor + 1 > focusableElements.length - 1 ? 0 : focusCursor + 1;
     }
     function decrement() {
         focusCursor = focusCursor - 1 < 0 ? focusableElements.length - 1 : focusCursor - 1;
     }
-    return (0, $e0f7025c70ae0285$export$57aaedcb6bd3df60)(container, "keydown", function(event) {
+    return (0, $f9fc0a4307b9ed89$export$57aaedcb6bd3df60)(container, "keydown", (event)=>{
         if (event.key === "Tab") {
             event.shiftKey ? decrement() : increment();
             focusableElements[focusCursor].focus();
@@ -45,37 +45,37 @@ function $fb83284f3c7078af$export$206640e88214a215(container, selector) {
 }
 
 
-function $41ec8bf5c226cc99$export$933baf54561e84b4(navbar) {
-    var btnMenuOpen = (0, $ad7d1ff078b161d2$export$836aee6bce45247)("#mobile-menu-open");
-    var btnMenuClose = (0, $ad7d1ff078b161d2$export$836aee6bce45247)("#mobile-menu-close");
-    var _a = (0, $fb83284f3c7078af$export$206640e88214a215)(navbar, "[data-mobile-menu-focusable]"), trapFocus = _a[0], releaseFocus = _a[1];
-    var menuMachine = {
+function $777da45f9e4654b7$export$933baf54561e84b4(navbar) {
+    const btnMenuOpen = (0, $2477b0e0305ba15a$export$836aee6bce45247)("#mobile-menu-open");
+    const btnMenuClose = (0, $2477b0e0305ba15a$export$836aee6bce45247)("#mobile-menu-close");
+    const [trapFocus, releaseFocus] = (0, $993b902bec18bac8$export$206640e88214a215)(navbar, "[data-mobile-menu-focusable]");
+    const menuMachine = {
         state: "closed",
-        toggleState: function() {
+        toggleState () {
             this.state = this.state === "closed" ? "open" : "closed";
             this.tick();
         },
-        setState: function(newState) {
+        setState (newState) {
             this.state = newState;
             this.tick();
         },
         actions: {
-            closed: function() {
+            closed () {
                 document.documentElement.classList.remove("mobile-menu-open");
                 releaseFocus();
             },
-            open: function() {
+            open () {
                 document.documentElement.classList.add("mobile-menu-open");
                 btnMenuClose.focus();
                 trapFocus();
             }
         },
-        tick: function() {
+        tick () {
             this.actions[this.state]();
         }
     };
-    var unlisteners = [];
-    var _b = (0, $e0f7025c70ae0285$export$90fc3a17d93f704c)(window, "focus", closeMenu), listenWindowFocus = _b[0], unlistenWindowFocus = _b[1];
+    const unlisteners = [];
+    const [listenWindowFocus, unlistenWindowFocus] = (0, $f9fc0a4307b9ed89$export$90fc3a17d93f704c)(window, "focus", closeMenu);
     listenWindowFocus();
     unlisteners.push(unlistenWindowFocus);
     function closeMenu() {
@@ -95,18 +95,15 @@ function $41ec8bf5c226cc99$export$933baf54561e84b4(navbar) {
             btnMenuClose,
             "closed"
         ]
-    ].forEach(function(_a) {
-        var element = _a[0], state = _a[1];
-        var _b = (0, $e0f7025c70ae0285$export$90fc3a17d93f704c)(element, "click", function() {
+    ].forEach(([element, state])=>{
+        const [listen, unlisten] = (0, $f9fc0a4307b9ed89$export$90fc3a17d93f704c)(element, "click", ()=>{
             menuMachine.setState(state);
-        }), listen = _b[0], unlisten = _b[1];
+        });
         listen();
         unlisteners.push(unlisten);
     });
     function cleanupListeners() {
-        unlisteners.forEach(function(unlisten) {
-            return unlisten();
-        });
+        unlisteners.forEach((unlisten)=>unlisten());
     }
     return cleanupListeners;
 }
@@ -114,7 +111,7 @@ function $41ec8bf5c226cc99$export$933baf54561e84b4(navbar) {
 
 
 
-function $0266d94240c51ce7$export$bd9e94318d9c1a25() {
+function $e2f8619e108b5746$export$bd9e94318d9c1a25() {
     function getIsDarkMode() {
         return localStorage.getItem("dark-mode") === "true";
     }
@@ -130,16 +127,14 @@ function $0266d94240c51ce7$export$bd9e94318d9c1a25() {
         else document.documentElement.classList.remove("dark");
     }
     updateUI();
-    var unlisteners = [];
-    (0, $ad7d1ff078b161d2$export$d32deb6b670bc3a1)("[data-toggle-dark-mode]").forEach(function(element) {
-        var _a = (0, $e0f7025c70ae0285$export$90fc3a17d93f704c)(element, "click", onToggleDarkMode), listen = _a[0], unlisten = _a[1];
+    const unlisteners = [];
+    (0, $2477b0e0305ba15a$export$d32deb6b670bc3a1)("[data-toggle-dark-mode]").forEach((element)=>{
+        const [listen, unlisten] = (0, $f9fc0a4307b9ed89$export$90fc3a17d93f704c)(element, "click", onToggleDarkMode);
         listen();
         unlisteners.push(unlisten);
     });
     function cleanupListeners() {
-        unlisteners.forEach(function(unlisten) {
-            return unlisten();
-        });
+        unlisteners.forEach((unlisten)=>unlisten());
     }
     return cleanupListeners;
 }
@@ -147,29 +142,23 @@ function $0266d94240c51ce7$export$bd9e94318d9c1a25() {
 
 
 
-function $e22c93a6ed734f5d$export$ff7706047246b98b() {
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
-
-function $55c867f00d864efb$var$easeOut(currentFrame, start, distanceToTravelFromStart, totalFrames) {
+function $a2f62d377d42522b$var$easeOut(currentFrame, start, distanceToTravelFromStart, totalFrames) {
     return Math.round(-distanceToTravelFromStart * (currentFrame /= totalFrames) * (currentFrame - 2) + start);
 }
-function $55c867f00d864efb$var$smoothScroll(options, callback) {
-    if (options === void 0) options = {};
-    var _totalFrames = options.totalFrames, _offset = options.offset, targetSelector = options.targetSelector;
+function $a2f62d377d42522b$var$smoothScroll(options = {}, callback) {
+    const { totalFrames: _totalFrames , offset: _offset , targetSelector: targetSelector  } = options;
     // There could be multiple elements that match selector or classname 'scroll-target' on the page.
     // Select the first one.
-    var target = (0, $ad7d1ff078b161d2$export$836aee6bce45247)(targetSelector !== null && targetSelector !== void 0 ? targetSelector : ".scroll-target");
+    const target = (0, $2477b0e0305ba15a$export$836aee6bce45247)(targetSelector ?? ".scroll-target");
     if (!target) return;
-    var offset = _offset !== null && _offset !== void 0 ? _offset : 0;
-    var totalFrames = _totalFrames !== null && _totalFrames !== void 0 ? _totalFrames : 20;
-    var start = window.scrollY;
-    var final = target.getBoundingClientRect().top + start + offset;
-    var distanceToTravelFromStart = final - start;
-    var currentFrame = 0;
-    var animationY = $55c867f00d864efb$var$easeOut(currentFrame, start, distanceToTravelFromStart, totalFrames);
-    var animationHandle;
+    const offset = _offset ?? 0;
+    const totalFrames = _totalFrames ?? 20;
+    const start = window.scrollY;
+    const final = target.getBoundingClientRect().top + start + offset;
+    const distanceToTravelFromStart = final - start;
+    let currentFrame = 0;
+    let animationY = $a2f62d377d42522b$var$easeOut(currentFrame, start, distanceToTravelFromStart, totalFrames);
+    let animationHandle;
     // // Disabling This seems to always immediately cancel scroll on iPhone :(
     // const [listenWindowScroll, forgetWindowScroll] = useEvent(window, "scroll", () => {
     //   // if (animationY !== window.scrollY) {
@@ -183,47 +172,47 @@ function $55c867f00d864efb$var$smoothScroll(options, callback) {
         // forgetWindowScroll();
         callback(didComplete);
     }
-    if ((0, $e22c93a6ed734f5d$export$ff7706047246b98b)()) {
-        window.scrollTo(0, final);
-        return;
-    }
+    // if (prefersReducedMotion()) {
+    //   window.scrollTo(0, final);
+    //   return;
+    // }
     (function animateScroll() {
         if (currentFrame === totalFrames) {
             window.scrollTo(0, final);
             cancelSroll(true);
             return;
         }
-        animationY = $55c867f00d864efb$var$easeOut(currentFrame, start, distanceToTravelFromStart, totalFrames);
+        animationY = $a2f62d377d42522b$var$easeOut(currentFrame, start, distanceToTravelFromStart, totalFrames);
         window.scrollTo(0, animationY);
         currentFrame += 1;
         animationHandle = requestAnimationFrame(animateScroll);
     })();
 }
-function $55c867f00d864efb$export$2a68c09ab2626bad() {
-    var scrollPromptButton = (0, $ad7d1ff078b161d2$export$836aee6bce45247)("#btn-scroll-prompt");
+function $a2f62d377d42522b$export$2a68c09ab2626bad() {
+    const scrollPromptButton = (0, $2477b0e0305ba15a$export$836aee6bce45247)("#btn-scroll-prompt");
     if (!scrollPromptButton) console.warn("[setupScrollPromptButton] Couldn't find element using selector '#btn-scroll-prompt'");
-    var _a = (0, $e0f7025c70ae0285$export$90fc3a17d93f704c)(scrollPromptButton, "click", function() {
-        $55c867f00d864efb$var$smoothScroll({
+    const [listenClick, forgetClick] = (0, $f9fc0a4307b9ed89$export$90fc3a17d93f704c)(scrollPromptButton, "click", ()=>{
+        $a2f62d377d42522b$var$smoothScroll({
             targetSelector: ".scroll-target",
             offset: -80,
             totalFrames: 40
-        }, function(didComplete) {
+        }, (didComplete)=>{
             console.log("[SmoothScroll::didComplete]", didComplete);
         });
-    }), listenClick = _a[0], forgetClick = _a[1];
+    });
     listenClick();
     return forgetClick;
 }
 
 
-var $65e27a733c7607bf$var$navbar = (0, $ad7d1ff078b161d2$export$836aee6bce45247)("#navbar");
-var $65e27a733c7607bf$var$cleanupMobileMenuListeners = (0, $41ec8bf5c226cc99$export$933baf54561e84b4)($65e27a733c7607bf$var$navbar);
-var $65e27a733c7607bf$var$cleanupToggleDarkmodeListeners = (0, $0266d94240c51ce7$export$bd9e94318d9c1a25)();
-var $65e27a733c7607bf$var$cleanupScrollPromptButton = (0, $55c867f00d864efb$export$2a68c09ab2626bad)();
-window.addEventListener("beforeunload", function() {
-    $65e27a733c7607bf$var$cleanupMobileMenuListeners();
-    $65e27a733c7607bf$var$cleanupToggleDarkmodeListeners();
-    $65e27a733c7607bf$var$cleanupScrollPromptButton();
+const $1ab88a2c134b3f01$var$navbar = (0, $2477b0e0305ba15a$export$836aee6bce45247)("#navbar");
+const $1ab88a2c134b3f01$var$cleanupMobileMenuListeners = (0, $777da45f9e4654b7$export$933baf54561e84b4)($1ab88a2c134b3f01$var$navbar);
+const $1ab88a2c134b3f01$var$cleanupToggleDarkmodeListeners = (0, $e2f8619e108b5746$export$bd9e94318d9c1a25)();
+const $1ab88a2c134b3f01$var$cleanupScrollPromptButton = (0, $a2f62d377d42522b$export$2a68c09ab2626bad)();
+window.addEventListener("beforeunload", ()=>{
+    $1ab88a2c134b3f01$var$cleanupMobileMenuListeners();
+    $1ab88a2c134b3f01$var$cleanupToggleDarkmodeListeners();
+    $1ab88a2c134b3f01$var$cleanupScrollPromptButton();
 });
 
 

@@ -4,7 +4,7 @@ from wagtail.images.blocks import ImageChooserBlock
 from blocks.models.link_block import LinkBlock
 
 class HeroBlock(StructBlock):
-  image = ImageChooserBlock(required=False)
+  # image = ImageChooserBlock(required=False)
   cta = StructBlock(
     [
       ("heading", CharBlock(max_length=140)),

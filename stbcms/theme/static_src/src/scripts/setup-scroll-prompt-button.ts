@@ -61,10 +61,10 @@ function smoothScroll(
     callback(didComplete);
   }
 
-  if (prefersReducedMotion()) {
-    window.scrollTo(0, final);
-    return;
-  }
+  // if (prefersReducedMotion()) {
+  //   window.scrollTo(0, final);
+  //   return;
+  // }
 
   (function animateScroll() {
     if (currentFrame === totalFrames) {
