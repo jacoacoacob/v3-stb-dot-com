@@ -13,6 +13,21 @@ function easeOut(
   )
 }
 
+// t, b, c, d
+function easeInOutQuad(
+  currentFrame: number,
+  start: number,
+  distanceToTravelFromStart: number,
+  totalFrames: number,
+) {
+	currentFrame /= totalFrames / 2;
+	if (currentFrame < 1) {
+    return distanceToTravelFromStart / 2 * currentFrame * currentFrame + start;
+  }
+	currentFrame--;
+	return -distanceToTravelFromStart / 2 * (currentFrame * (currentFrame - 2) - 1) + start;
+}
+
 interface SmoothScrollOptions {
   totalFrames?: number;
   offset?: number;
@@ -41,7 +56,7 @@ function smoothScroll(
   const distanceToTravelFromStart = final - start;
 
   let currentFrame = 0;
-  let animationY = easeOut(currentFrame, start, distanceToTravelFromStart, totalFrames);
+  let animationY = easeInOutQuad(currentFrame, start, distanceToTravelFromStart, totalFrames);
   let animationHandle: number;
 
 
@@ -72,7 +87,7 @@ function smoothScroll(
       cancelSroll(true);
       return;
     }
-    animationY = easeOut(currentFrame, start, distanceToTravelFromStart, totalFrames);
+    animationY = easeInOutQuad(currentFrame, start, distanceToTravelFromStart, totalFrames);
     window.scrollTo(0, animationY);
     currentFrame += 1;
     animationHandle = requestAnimationFrame(animateScroll);
@@ -96,7 +111,7 @@ function setupScrollPromptButton() {
         {
           targetSelector: ".scroll-target",
           offset: -80,
-          totalFrames: 40,
+          totalFrames: 30,
         },
         (didComplete) => {
           console.log("[SmoothScroll::didComplete]", didComplete);
