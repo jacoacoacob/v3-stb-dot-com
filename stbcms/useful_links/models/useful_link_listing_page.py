@@ -5,7 +5,7 @@ from .useful_link_category import UsefulLinkCategory
 from .useful_link_tag import UsefulLinkTag
 
 
-class UsefulLinksPage(Page):
+class UsefulLinkListingPage(Page):
   parent_page_types = ["home.HomePage"]
   subpage_types = []
 

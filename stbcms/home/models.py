@@ -67,5 +67,5 @@ class HomePage(Page):
     subpage_types = [
         "blog.BlogPostListingPage",
         "events.EventListingPage",
-        "useful_links.UsefulLinksPage",
+        "useful_links.UsefulLinkListingPage",
     ]

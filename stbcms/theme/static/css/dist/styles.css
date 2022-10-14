@@ -1877,21 +1877,16 @@ html.mobile-menu-open .mobile-menu {
   z-index: 10;
 }
 
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
-
 .ml-1 {
   margin-left: 0.25rem;
 }
 
-.mr-2 {
-  margin-right: 0.5rem;
-}
-
 .mr-1 {
   margin-right: 0.25rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
 }
 
 .block {
@@ -1928,6 +1923,10 @@ html.mobile-menu-open .mobile-menu {
 
 .h-4 {
   height: 1rem;
+}
+
+.h-8 {
+  height: 2rem;
 }
 
 .w-6 {
@@ -2351,13 +2350,6 @@ html.mobile-menu-open .mobile-menu {
 .prose-li\:my-0 :is(:where(li):not(:where([class~="not-prose"] *))) {
   margin-top: 0px;
   margin-bottom: 0px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .motion-reduce\:animate-none {
-    -webkit-animation: none;
-            animation: none;
-  }
 }
 
 .dark .dark\:prose-invert {
