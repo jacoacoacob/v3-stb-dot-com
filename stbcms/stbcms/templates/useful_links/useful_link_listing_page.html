@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<section class="flex justify-center w-full h-full pb-8">
+  <div class="max-w-2xl flex-1 p-4">
+    <ul class="space-y-6">
+      {% for link in links %}
+      <li>
+        <a href="{{ link.link_url }}" target="_blank" rel="noopener noreferrer" class="card card-dense card-fancy">
+          {% include "partials/useful_link_content.html" with link=link %}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}

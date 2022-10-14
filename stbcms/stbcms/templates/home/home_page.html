@@ -9,11 +9,8 @@
         {% include_block block %}
         {% if not page.disable_scroll_prompt %}
           <div class="sm:absolute bottom-6">
-            {% comment %}
-            <!-- <button id="btn-scroll-prompt" class="p-2 rounded-full text-emerald-600 transition-colors hover:bg-slate-200 dark:hover:bg-slate-700 animate-pulse motion-reduce:animate-none"> -->
-            {% endcomment %}
             <button id="btn-scroll-prompt" class="p-2 rounded-full text-emerald-600 transition-colors hover:bg-slate-200 dark:hover:bg-slate-700 animate-pulse">
-              {% icon "arrow-small-down" %}
+              {% icon "arrow-small-down" class="h-8" %}
             </button>
           </div>
         {% endif %}
@@ -35,7 +32,7 @@
               {% if featured_blog_post %}
                 <div class="space-y-8">
                   <div class="space-y-4">
-                    <h3 class="px-2 text-lg font-mono font-bold">from the blog...</h3>
+                    <h2 class="px-2 text-lg font-mono font-bold">from the blog...</h2>
                     <a href="{{ featured_blog_post.url }}" class="card card-fancy card-dense">
                       {% include "partials/blog_post_slim.html" with post=featured_blog_post %}
                     </a>
@@ -48,7 +45,7 @@
               {% if featured_event %}
                 <div class="space-y-8">
                   <div class="space-y-4">
-                    <h3 class="px-2 text-lg font-mono font-bold">featured event...</h3>
+                    <h2 class="px-2 text-lg font-mono font-bold">featured event...</h2>
                     <a href="{{ featured_event.url }}" class="card card-fancy card-dense">
                       {% include "partials/event_slim.html" with event=featured_event %}
                     </a>
