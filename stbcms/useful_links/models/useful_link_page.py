@@ -1,23 +1,17 @@
-from tabnanny import verbose
 from django.db import models
+from django.http import Http404
 
-from modelcluster.fields import ParentalKey
-from modelcluster.models import ClusterableModel
+from modelcluster.contrib.taggit import ClusterTaggableManager
 
-from taggit.models import TaggedItemBase, TagBase, ItemBase
-from taggit.managers import TaggableManager
-
+from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
-from wagtail.search.index import Indexed, SearchField
-from wagtail.snippets.models import register_snippet
 
-@register_snippet
-class UsefulLink(Indexed, ClusterableModel):
-  categories = TaggableManager(
+class UsefulLinkPage(Page):
+  categories = ClusterTaggableManager(
     through="useful_links.UsefulLinkCategories",
     blank=True
   )
-  tags = TaggableManager(
+  tags = ClusterTaggableManager(
     through="useful_links.UsefulLinkTag",
     blank=True
   )
@@ -39,13 +33,10 @@ class UsefulLink(Indexed, ClusterableModel):
     verbose_name="Date Updated"
   )
 
-  search_fields = [
-    SearchField("link_text", partial_match=True),
-    SearchField("link_url", partial_match=True),
-    SearchField("description", partial_match=True)
-  ]
+  parent_page_types = ["useful_links.UsefulLinkListingPage"]
+  subpage_types = []
 
-  panels = [
+  content_panels = Page.content_panels + [
     MultiFieldPanel(
       [
         FieldPanel("link_url"),
@@ -66,6 +57,10 @@ class UsefulLink(Indexed, ClusterableModel):
     )
   ]
 
-  class Meta:
-    verbose_name = "Useful Link"
-    verbose_name_plural = "Useful Links"
+  def get_sitemap_urls(self, request=None):
+    return []
+  
+  def serve(self, request, *args, **kwargs):
+    return Http404
+
+  

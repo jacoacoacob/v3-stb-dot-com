@@ -32,7 +32,7 @@ class UsefulLinkCategories(ItemBase):
     on_delete=models.CASCADE
   )
   content_object = ParentalKey(
-    to="useful_links.UsefulLink",
+    to="useful_links.UsefulLinkPage",
     related_name="categorized_items",
     on_delete=models.CASCADE
   )

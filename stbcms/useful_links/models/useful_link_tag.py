@@ -6,7 +6,7 @@ from taggit.models import TaggedItemBase
 
 class UsefulLinkTag(TaggedItemBase):
   content_object = ParentalKey(
-    "useful_links.UsefulLink",
+    "useful_links.UsefulLinkPage",
     on_delete=models.CASCADE,
     related_name="tagged_items"
   )
