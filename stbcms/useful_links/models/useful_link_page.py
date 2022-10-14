@@ -54,6 +54,6 @@ class UsefulLinkPage(Page):
     return []
   
   def serve(self, request, *args, **kwargs):
-    return Http404
+    raise Http404
 
   
