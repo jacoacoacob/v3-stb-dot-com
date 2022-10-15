@@ -9,7 +9,7 @@ from taggit.models import ItemBase, TagBase
 from wagtail.search.index import Indexed, SearchField
 from wagtail.snippets.models import register_snippet
 
-@register_snippet
+# @register_snippet
 class UsefulLinkCategory(Indexed, TagBase):
   free_tagging = False
   name = models.CharField(max_length=60, unique=True)
