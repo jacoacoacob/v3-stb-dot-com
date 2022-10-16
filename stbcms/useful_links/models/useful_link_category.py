@@ -7,9 +7,8 @@ from modelcluster.fields import ParentalKey
 from taggit.models import ItemBase, TagBase
 
 from wagtail.search.index import Indexed, SearchField
-from wagtail.snippets.models import register_snippet
 
-@register_snippet
+
 class UsefulLinkCategory(Indexed, TagBase):
   free_tagging = False
   name = models.CharField(max_length=60, unique=True)
@@ -32,7 +31,7 @@ class UsefulLinkCategories(ItemBase):
     on_delete=models.CASCADE
   )
   content_object = ParentalKey(
-    to="useful_links.UsefulLink",
+    to="useful_links.UsefulLinkPage",
     related_name="categorized_items",
     on_delete=models.CASCADE
   )

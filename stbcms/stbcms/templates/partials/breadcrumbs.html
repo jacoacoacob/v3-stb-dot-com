@@ -6,11 +6,11 @@
     <ul class="navbar-breadcrumbs-list">
       {% for page in breadcrumbs %}
         <li>
-          <a href="{% pageurl page %}" class="{% if forloop.last %}font-semibold{% endif %} inline-block">
+          <a href="{% pageurl page %}" class="{% if forloop.last %}font-semibold{% endif %} inline-block mr-1">
             {{ page.title }}
           </a>
+          {% if not forloop.last %}<span class="font-thin inline-block">/</span>{% endif %}
         </li>
-        {% if not forloop.last %}<span class="font-thin inline-block">/</span>{% endif %}
       {% endfor%}
     </ul>
   </div>

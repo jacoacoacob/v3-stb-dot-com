@@ -8,9 +8,9 @@
     <ul class="flex space-x-3 text-lg">
       {% for page in pages %}
         <li>
-          <a href="{{ page.url }}">{{ page.title }}</a>
+          <a href="{{ page.url }}" class="mr-2">{{ page.title }}</a>
+          {% if not forloop.last %}<span class="font-thin">|</span>{% endif %}
         </li>
-        {% if not forloop.last %}<span class="font-thin">|</span>{% endif %}
       {% endfor %}
     </ul>
   </nav>

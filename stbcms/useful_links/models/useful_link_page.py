@@ -1,15 +1,59 @@
+from django.db import models
+from django.http import Http404
+
+from modelcluster.contrib.taggit import ClusterTaggableManager
+
 from wagtail.models import Page
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
-from .useful_link import UsefulLink
-from .useful_link_category import UsefulLinkCategory
-from .useful_link_tag import UsefulLinkTag
+class UsefulLinkPage(Page):
+  categories = ClusterTaggableManager(
+    through="useful_links.UsefulLinkCategories",
+    blank=True
+  )
+  tags = ClusterTaggableManager(
+    through="useful_links.UsefulLinkTag",
+    blank=True
+  )
+  link_url = models.URLField(unique=True)
+  description = models.TextField(max_length=2000, blank=True)
+  ts_created = models.DateTimeField(
+    auto_created=True,
+    auto_now_add=True,
+    verbose_name="Date Created"
+  )
+  ts_updated = models.DateTimeField(
+    auto_created=True,
+    auto_now=True,
+    verbose_name="Date Updated"
+  )
 
-
-class UsefulLinksPage(Page):
-  parent_page_types = ["home.HomePage"]
+  parent_page_types = ["useful_links.UsefulLinkListingPage"]
   subpage_types = []
 
-  def get_context(self, request, *args, **kwargs):
-    context = super().get_context(request, *args, **kwargs)
-    context["links"] = UsefulLink.objects.filter(is_live__exact=True)
-    return context
+  content_panels = Page.content_panels + [
+    MultiFieldPanel(
+      [
+        FieldPanel("link_url"),
+        FieldPanel("description"),
+      ],
+      heading="Details",
+      classname="collapsible"
+    ),
+    MultiFieldPanel(
+      [
+        FieldPanel("categories", heading="Categories (type)"),
+        FieldPanel("tags", heading="Tags (subject)"),
+      ],
+      heading="Categories & Tags",
+      classname="collapsible"
+    )
+  ]
+
+  def get_sitemap_urls(self, request=None):
+    return []
+  
+  def serve(self, request, *args, **kwargs):
+    raise Http404
+
+  
