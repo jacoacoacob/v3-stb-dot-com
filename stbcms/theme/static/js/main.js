@@ -150,7 +150,6 @@ function $0266d94240c51ce7$export$bd9e94318d9c1a25() {
 function $55c867f00d864efb$var$easeOut(currentFrame, start, distanceToTravelFromStart, totalFrames) {
     return Math.round(-distanceToTravelFromStart * (currentFrame /= totalFrames) * (currentFrame - 2) + start);
 }
-// t, b, c, d
 function $55c867f00d864efb$var$easeInOutQuad(currentFrame, start, distanceToTravelFromStart, totalFrames) {
     currentFrame /= totalFrames / 2;
     if (currentFrame < 1) return distanceToTravelFromStart / 2 * currentFrame * currentFrame + start;
@@ -203,7 +202,10 @@ function $55c867f00d864efb$var$smoothScroll(options, callback) {
 }
 function $55c867f00d864efb$export$2a68c09ab2626bad() {
     var scrollPromptButton = (0, $ad7d1ff078b161d2$export$836aee6bce45247)("#btn-scroll-prompt");
-    if (!scrollPromptButton) console.warn("[setupScrollPromptButton] Couldn't find element using selector '#btn-scroll-prompt'");
+    if (!scrollPromptButton) {
+        console.warn("[setupScrollPromptButton] Couldn't find element using selector '#btn-scroll-prompt'");
+        return function() {};
+    }
     var _a = (0, $e0f7025c70ae0285$export$90fc3a17d93f704c)(scrollPromptButton, "click", function() {
         $55c867f00d864efb$var$smoothScroll({
             targetSelector: ".scroll-target",
