@@ -13,7 +13,6 @@ function easeOut(
   )
 }
 
-// t, b, c, d
 function easeInOutQuad(
   currentFrame: number,
   start: number,
@@ -100,7 +99,8 @@ function setupScrollPromptButton() {
   if (!scrollPromptButton) {
     console.warn(
       "[setupScrollPromptButton] Couldn't find element using selector '#btn-scroll-prompt'"
-    )
+    );
+    return () => {};
   }
 
   const [listenClick, forgetClick] = useEvent(

@@ -28,3 +28,9 @@ _the command `showmigrations` is useful to see which migrations have been applie
 4. run `migrate --fake <the_app> zero` to rollback all migrations previously applied to the database
 5. delete all migration files in `<the_app>`'s `migrations` directory
 6. remove the app from INSTALLED_APPS in your settings file
+
+
+# Deploy Checklist
+- [ ] (PRE-DEPLOY) `makemigrations`
+- [ ] `migrate`
+- [ ] `pg_dump -U <user_name> -d <database_name> --verbose --clean > <database_name><prod_commit_sha>.sql`
