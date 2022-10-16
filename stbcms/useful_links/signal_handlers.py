@@ -5,17 +5,18 @@ from wagtail.contrib.frontend_cache.utils import PurgeBatch
 
 from .models import UsefulLinkPage, UsefulLinkListingPage
 
-def purge_event_listing_page_cache(event_page: UsefulLinkPage):
+def purge_useful_link_listing_page_cache(page: UsefulLinkPage):
   batch = PurgeBatch()
-  for event_listing_page in UsefulLinkListingPage.objects.live():
-    if event_page in event_listing_page.get_events():
-      batch.add_page(event_listing_page)
+  for listing_page in UsefulLinkListingPage.objects.live():
+    page_itmes = listing_page.get_useful_links()
+    if page in page_itmes:
+      batch.add_page(listing_page)
   print("Purging UsefulLinkListingPage URLs:", batch.urls)
   batch.purge()
 
 
 def handler(instance: UsefulLinkPage, **kwargs):
-  purge_event_listing_page_cache(instance)
+  purge_useful_link_listing_page_cache(instance)
 
 
 def register_signal_handlers():
