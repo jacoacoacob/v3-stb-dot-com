@@ -34,3 +34,4 @@ _the command `showmigrations` is useful to see which migrations have been applie
 - [ ] (PRE-DEPLOY) `makemigrations`
 - [ ] `migrate`
 - [ ] `pg_dump -U <user_name> -d <database_name> --verbose --clean > <database_name><prod_commit_sha>.sql`
+- [ ] `rsync -cv --progress user@host:/path/to/backup-file.sql path/to/backup-folder/`
