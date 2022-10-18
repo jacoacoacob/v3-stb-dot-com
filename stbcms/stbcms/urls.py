@@ -13,7 +13,7 @@ from core.views import RobotsView
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
-    path("admin/iguanatrivialavenge/", include(wagtailadmin_urls)),
+    path("admin/uphillcopilot/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path("robots.txt", RobotsView.as_view(), name="robots"),
