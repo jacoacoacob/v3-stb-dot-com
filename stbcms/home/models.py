@@ -1,36 +1,42 @@
-from email.policy import default
 from django.db import models
-from django.forms.utils import ErrorList
+from django.forms import ValidationError
 
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
-from wagtail.blocks import RichTextBlock, PageChooserBlock, StructBlock
-from wagtail.blocks.struct_block import StructBlockValidationError
+from wagtail.blocks import RichTextBlock, PageChooserBlock, StructBlock, ListBlock
 from wagtail.models import Page
 from wagtail.fields import StreamField
 
 from blocks.models import HeroBlock
 
 
-class FeaturedPagesBlock(StructBlock):
-    blog_post_page = PageChooserBlock(required=False, page_type="blog.BlogPostPage")
-    event_page = PageChooserBlock(required=False, page_type="events.EventPage")
-    
+class PublishedPageChooserBlock(PageChooserBlock):
     def clean(self, value):
-        errors = {}
-        blog_post_page = value.get("blog_post_page")
-        event_page = value.get("event_page")
+        page = super().clean(value)
+        if page and not page.live:
+            raise ValidationError("You may only choose published pages.")
+        return page
+        
 
-        if blog_post_page and not blog_post_page.live:
-            errors["blog_post_page"] = ErrorList(["You may only choose published pages."])
-
-        if event_page and not event_page.live:
-            errors["event_page"] = ErrorList(["You may only choose published pages."])
-
-        if any(errors):
-            raise StructBlockValidationError(errors)
-
-        return super().clean(value)
-
+class FeaturedPagesBlock(StructBlock):
+    blog_post_page = PublishedPageChooserBlock(
+        required=False,
+        page_type="blog.BlogPostPage",
+        label="Featured Blog Post"
+    )
+    event_page = PublishedPageChooserBlock(
+        required=False,
+        page_type="events.EventPage",
+        label="Featured Event",
+    )
+    useful_link_pages = ListBlock(
+        PublishedPageChooserBlock(
+            required=True,
+            page_type="useful_links.UsefulLinkPage",
+        ),
+        label="Featured Useful Link",
+        collapsed=True,
+    )
+    
 
 class HomePage(Page):
     body = StreamField(
@@ -45,7 +51,6 @@ class HomePage(Page):
             "featured_pages": { "max_num": 1 },
         },
         blank=True,
-        collapsed=True,
         use_json_field=True
     )
     disable_scroll_prompt = models.BooleanField(

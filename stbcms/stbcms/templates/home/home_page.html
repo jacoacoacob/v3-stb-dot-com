@@ -9,7 +9,7 @@
         {% include_block block %}
         {% if not page.disable_scroll_prompt %}
           <div class="sm:absolute bottom-6">
-            <button id="btn-scroll-prompt" class="p-2 rounded-full text-emerald-600 transition-colors hover:bg-slate-200 dark:hover:bg-slate-700 animate-pulse">
+            <button id="btn-scroll-prompt" class="p-2 rounded-full text-emerald-600 transition-colors hover:bg-slate-200 dark:hover:bg-slate-700 animate-pulse" title="Scroll down">
               {% icon "arrow-small-down" class="h-8" %}
             </button>
           </div>
@@ -24,15 +24,26 @@
           </article>
         </div>
         {% elif block.block_type == 'featured_pages' %}
-        {% with featured_blog_post=block.value.blog_post_page featured_event=block.value.event_page %}
-          {% if featured_blog_post or featured_event %}
+        {% with featured_blog_post=block.value.blog_post_page featured_event=block.value.event_page featured_useful_links=block.value.useful_link_pages %}
+          {% if featured_blog_post or featured_event or featured_useful_links %}
           <div class="flex flex-col justify-center items-center site-half-height px-4 py-20">
             <div class="scroll-target"></div>
-            <div class="max-w-2xl w-full space-y-16">
+            <div class="max-w-2xl w-full space-y-16 sm:space-y-24">
+              {% if featured_event %}
+                <div class="space-y-8 sm:space-y-10">
+                  <div class="space-y-6 sm:space-y-8">
+                    <h2 class="px-2 text-lg sm:text-xl font-mono font-bold">featured event...</h2>
+                    <a href="{{ featured_event.url }}" class="card card-fancy card-dense">
+                      {% include "partials/event_slim.html" with event=featured_event %}
+                    </a>
+                  </div>
+                  <a href="/events" class="px-2 inline-block font-bold text-emerald-500">See more events</a>
+                </div>
+              {% endif %}
               {% if featured_blog_post %}
-                <div class="space-y-8">
-                  <div class="space-y-4">
-                    <h2 class="px-2 text-lg font-mono font-bold">from the blog...</h2>
+                <div class="space-y-8 sm:space-y-10">
+                  <div class="space-y-6 sm:space-y-8">
+                    <h2 class="px-2 text-lg sm:text-xl font-mono font-bold">from the blog...</h2>
                     <a href="{{ featured_blog_post.url }}" class="card card-fancy card-dense">
                       {% include "partials/blog_post_slim.html" with post=featured_blog_post %}
                     </a>
@@ -42,15 +53,23 @@
                   </a>
                 </div>
               {% endif %}
-              {% if featured_event %}
-                <div class="space-y-8">
-                  <div class="space-y-4">
-                    <h2 class="px-2 text-lg font-mono font-bold">featured event...</h2>
-                    <a href="{{ featured_event.url }}" class="card card-fancy card-dense">
-                      {% include "partials/event_slim.html" with event=featured_event %}
-                    </a>
+              {% if featured_useful_links %}
+                <div class="space-y-8 sm:space-y-10">
+                  <div class="space-y-6 sm:space-y-8">
+                    <h2 class="px-2 text-lg sm:text-xl font-mono font-bold">featured useful links...</h2>
+                    <ul class="space-y-8">
+                      {% for useful_link_page in featured_useful_links %}
+                      <li>
+                        <a href="{{ useful_link_page.link_url }}" target="_blank" rel="noopener noreferrer" class="card card-dense card-fancy">
+                          {% include "partials/useful_link_content.html" with link=useful_link_page %}
+                        </a>
+                      </li>
+                      {% endfor %}
+                    </ul>
                   </div>
-                  <a href="/events" class="px-2 inline-block font-bold text-emerald-500">See more events</a>
+                  <a href="/useful-links" class="px-2 inline-block font-bold text-emerald-500">
+                    See more useful links
+                  </a>
                 </div>
               {% endif %}
             </div>
