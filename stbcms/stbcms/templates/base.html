@@ -44,5 +44,9 @@
 
         {% stbcms_scripts %}
 
+        {% if not request.is_preview %}
+        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7b969530a02444df90457c3409deb315"}'></script>
+        {% endif %}
+
     </body>
 </html>
