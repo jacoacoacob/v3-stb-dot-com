@@ -12,7 +12,7 @@ class UsefulLinkPage(Page):
     blank=True
   )
   topics = ClusterTaggableManager(
-    through="useful_links.UsefulLinkTag",
+    through="useful_links.UsefulLinkTopics",
     blank=True
   )
   link_url = models.URLField(unique=True)
