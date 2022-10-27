@@ -1,13 +1,13 @@
-from email.policy import default
 from django.db import models
 
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.models import Page
 
 from .useful_link_page import UsefulLinkPage
 from .useful_link_category import UsefulLinkCategories, UsefulLinkCategory
 
-class UsefulLinkListingPage(Page):
+class UsefulLinkListingPage(RoutablePageMixin, Page):
   header_text = models.TextField(max_length=500)
   disable_tags = models.BooleanField(
     default=False,
@@ -23,12 +23,15 @@ class UsefulLinkListingPage(Page):
       heading="Feature Flags"
     )
   ]
-  
 
   parent_page_types = ["home.HomePage"]
   subpage_types = ["useful_links.UsefulLinkPage"]
 
-  def get_useful_links(self):
+  def get_useful_links(self, category_slug=None, topic_slug=None):
+    # if category_slug:
+    #   return UsefulLinkPage.objects.child_of(self).live().filter(categories__slug=category_slug)
+    # if topic_slug:
+    #   return UsefulLinkPage.objects.child_of(self).live().filter(topics__slug=topic_slug)
     return UsefulLinkPage.objects.child_of(self).live()
 
   def get_categories(self, links):
@@ -43,9 +46,49 @@ class UsefulLinkListingPage(Page):
       topics += [topic for topic in link.topics.all() if topic not in topics]
     return topics
 
-  def get_context(self, request, *args, **kwargs):
-    context = super().get_context(request, *args, **kwargs)
-    context["links"] = self.get_useful_links()
-    context["categories"] = self.get_categories(context["links"])
-    context["topics"] = self.get_topics(context["links"])
-    return context
+  @path("")
+  def useful_links(self, request):
+    links = self.get_useful_links()
+    categories = self.get_categories(links)
+    topics = self.get_topics(links)
+    return self.render(
+      request,
+      context_overrides={
+        "links": links,
+        "categories": categories,
+        "topics": topics,
+      }
+    )
+
+  @path("category/<category_slug>/")
+  def category_useful_links(self, request, category_slug):
+    """View function for useful links page displaying links of a given category"""
+    links = self.get_useful_links()
+    categories = self.get_categories(links)
+    topics = self.get_topics(links)
+    return self.render(
+      request,
+      context_overrides={
+        "links": links,
+        "categories": categories,
+        "topics": topics,
+      }
+    )
+
+  
+  @path("topic/<topic_slug>/")
+  def topic_useful_links(self, request, topic_slug):
+    """View function for useful links page displaying links of a given topic"""
+    all_links = self.get_useful_links()
+    topic_links = all_links.filter(topics__slug=topic_slug)
+    categories = self.get_categories(all_links)
+    topics = self.get_topics(topic_links)
+    return self.render(
+      request,
+      context_overrides={
+        "links": topic_links,
+        "categories": categories,
+        "topics": topics,
+      }
+    )
+  
