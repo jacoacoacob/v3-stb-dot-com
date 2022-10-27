@@ -44,7 +44,7 @@
 
         {% stbcms_scripts %}
 
-        {% if not request.is_preview %}
+        {% if not request.is_preview and "localhost" not in request.META.HTTP_HOST %}
         <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7b969530a02444df90457c3409deb315"}'></script>
         {% endif %}
 

@@ -11,7 +11,7 @@ class UsefulLinkPage(Page):
     through="useful_links.UsefulLinkCategories",
     blank=True
   )
-  tags = ClusterTaggableManager(
+  topics = ClusterTaggableManager(
     through="useful_links.UsefulLinkTag",
     blank=True
   )
@@ -42,8 +42,8 @@ class UsefulLinkPage(Page):
     ),
     MultiFieldPanel(
       [
-        FieldPanel("categories", heading="Categories (type)"),
-        FieldPanel("tags", heading="Tags (subject)"),
+        FieldPanel("categories", heading="Categories"),
+        FieldPanel("topics", heading="Topics"),
       ],
       heading="Categories & Tags",
       classname="collapsible"

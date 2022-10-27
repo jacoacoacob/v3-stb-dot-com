@@ -17,7 +17,7 @@ class UsefulLinkPageAdmin(ModelAdmin):
   menu_label = "Useful Links"
   menu_icon = "link"
   list_display = ("title", "ts_created", "ts_updated")
-  list_filter = ("categories", "tags", "ts_created", "ts_updated")
+  list_filter = ("categories", "topics", "ts_created", "ts_updated")
   search_fields = ("link_url", "title", "description")
 
 

@@ -3,16 +3,52 @@
 
 {% block content %}
 <section class="flex justify-center w-full h-full pb-8">
-  <div class="max-w-2xl flex-1 p-4">
-    <ul class="space-y-6">
-      {% for link in links %}
-      <li>
-        <a href="{{ link.link_url }}" target="_blank" rel="noopener noreferrer" class="card card-dense card-fancy">
-          {% include "partials/useful_link_content.html" with link=link %}
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
+  <div class="flex flex-col sm:flex-row items-start p-4 w-full">
+
+    <section class="flex justify-center flex-1">
+      <ul class="space-y-6 max-w-2xl">
+        {% for link in links %}
+        <li>
+          <a href="{{ link.link_url }}" target="_blank" rel="noopener noreferrer" class="card card-dense card-fancy">
+            {% include "partials/useful_link_content.html" with link=link %}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="
+      space-y-8 border-slate-300 dark:border-slate-600
+      w-full mt-8 pt-8 border-t
+      sm:max-w-[200px] sm:mt-0 sm:pt-0 sm:border-t-0 sm:ml-4 sm:pl-4 sm:border-l sm:sticky sm:top-16
+      md:max-w-[200px]
+      lg:max-w-xs lg:ml-8 lg:pl-8
+    ">
+      <div>
+        <h2 class="font-mono font-semibold">Categories</h2>
+        <ul class="flex flex-wrap items-center">
+          {% for category in categories %}
+          <li class="m-1">
+            <a href="/useful-links/category/{{ category.slug }}/" class="badge capitalize rounded-none text-slate-900 dark:bg-slate-200 dark:text-slate-800">
+              {{ category }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div>
+        <h2 class="font-mono font-semibold">Topics</h2>
+        <ul class="flex flex-wrap items-center">
+          {% for topic in topics %}
+          <li class="m-1">
+            <a href="/useful-links/topic/{{ topic.slug }}/" class="badge capitalize rounded-none text-slate-900 dark:bg-slate-200 dark:text-slate-800">
+              {{ topic }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
   </div>
 </section>
 {% endblock %}
