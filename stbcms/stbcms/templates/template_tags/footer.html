@@ -15,16 +15,16 @@
     </ul>
   </nav>
   <ul class="flex space-x-2">
-    {% if settings.facebook %}
+    {% if settings.facebook_url %}
     <li>
-      <a href="{{ settings.facebook }}" class="footer__icon-link" target="_blank" rel="noopener noreferrer" title="Navigate to Facebook">
+      <a href="{{ settings.facebook_url }}" class="footer__icon-link" target="_blank" rel="noopener noreferrer" title="Navigate to Facebook">
         {% icon "facebook" %}
       </a>
     </li>
     {% endif %}
-    {% if settings.twitter %}
+    {% if settings.twitter_url %}
     <li>
-      <a href="{{ settings.twitter }}" class="footer__icon-link" target="_blank" rel="noopener noreferrer" title="Navigate to Twitter">
+      <a href="{{ settings.twitter_url }}" class="footer__icon-link" target="_blank" rel="noopener noreferrer" title="Navigate to Twitter">
         {% icon "twitter" %}
       </a>
     </li>
