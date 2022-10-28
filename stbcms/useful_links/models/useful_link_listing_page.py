@@ -43,7 +43,6 @@ class UsefulLinkListingPage(RoutablePageMixin, Page):
 
   @path("")
   def useful_links(self, request):
-    print(self.full_url + self.reverse_subpage("category_useful_links", args=("hi",)))
     links = self.get_useful_links()
     categories = self.get_categories(links)
     topics = self.get_topics(links)
