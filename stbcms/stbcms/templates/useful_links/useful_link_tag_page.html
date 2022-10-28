@@ -1,15 +1,18 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailroutablepage_tags %}
 
 {% block content %}
 <section class="flex justify-center w-full h-full pb-8">
   <div class="flex flex-col sm:flex-row items-start p-4 w-full">
-    <section class="flex flex-col items-center justify-center flex-1 space-y-8">
-      <header class="w-full max-w-2xl px-2 pb-8 space-y-4 border-b border-slate-300 dark:border-slate-600">
-        <h2 class="text-2xl font-semibold">{{ page.title }}</h2>
-        <p class="text-2xl font-light">
-          {{ page.header_text }}
-        </p>
+    <section class="flex flex-col items-center sm:justify-center flex-1 space-y-8">
+      <header class="w-full max-w-2xl px-2 pb-4 space-y-4">
+        <a
+          href="{% routablepageurl page 'useful_links' %}"
+          class="inline-block font-semibold text-emerald-500 hover:underline"
+        >
+          Go back to all links
+        </a>
+        <h2 class="text-2xl font-semibold">{{ title }}</h2>
       </header>
       <ul class="space-y-6 max-w-2xl">
         {% for link in links %}
@@ -22,7 +25,7 @@
       </ul>
     </section>
     {% if not page.disable_tags %}
-    {% include "partials/useful_link_topics_and_categories.html" with categories=categories topcs=topics %}
+    {% include "partials/useful_link_topics_and_categories.html" %}
     {% endif %}
   </div>
 </section>

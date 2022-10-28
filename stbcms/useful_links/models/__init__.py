@@ -1,4 +1,4 @@
 from .useful_link_page import UsefulLinkPage
 from .useful_link_listing_page import UsefulLinkListingPage
-from .useful_link_tag import UsefulLinkTag
+from .useful_link_topic import UsefulLinkTopic
 from .useful_link_category import UsefulLinkCategory

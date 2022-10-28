@@ -1,0 +1,50 @@
+{% load wagtailcore_tags %}
+
+<section class="
+  space-y-8 border-slate-300 dark:border-slate-600
+  w-full mt-8 pt-8 border-t
+  sm:max-w-[200px] sm:mt-0 sm:pt-0 sm:border-t-0 sm:ml-4 sm:pl-4 sm:border-l sm:sticky sm:top-16
+  md:max-w-[200px]
+  lg:max-w-xs lg:ml-8 lg:pl-8
+">
+  {% if categories %}
+  <div>
+    <h3 class="font-mono font-semibold">Categories</h3>
+    <ul class="flex flex-wrap items-center">
+      {% for category in categories %}
+      <li class="m-1">
+        <a
+          href="/useful-links/category/{{ category.slug }}/"
+          class="
+            badge capitalize rounded-none text-slate-900 
+            {% if category.slug == selected_category %}bg-slate-800 text-white dark:bg-slate-200 dark:text-slate-800{% endif %}
+          "
+        >
+          {{ category }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  {% if topics %}
+  <div>
+    <h3 class="font-mono font-semibold">Topics</h3>
+    <ul class="flex flex-wrap items-center">
+      {% for topic in topics %}
+      <li class="m-1">
+        <a
+          href="/useful-links/topic/{{ topic.slug }}/"
+          class="
+            badge capitalize rounded-none text-slate-900
+            {% if topic.slug == selected_topic %}bg-slate-800 text-white dark:bg-slate-200 dark:text-slate-800{% endif %}
+          "
+        >
+          {{ topic }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</section>
