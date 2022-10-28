@@ -5,7 +5,6 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.models import Page
 
 from .useful_link_page import UsefulLinkPage
-from .useful_link_category import UsefulLinkCategories, UsefulLinkCategory
 
 class UsefulLinkListingPage(RoutablePageMixin, Page):
   header_text = models.TextField(max_length=500)
@@ -27,11 +26,7 @@ class UsefulLinkListingPage(RoutablePageMixin, Page):
   parent_page_types = ["home.HomePage"]
   subpage_types = ["useful_links.UsefulLinkPage"]
 
-  def get_useful_links(self, category_slug=None, topic_slug=None):
-    # if category_slug:
-    #   return UsefulLinkPage.objects.child_of(self).live().filter(categories__slug=category_slug)
-    # if topic_slug:
-    #   return UsefulLinkPage.objects.child_of(self).live().filter(topics__slug=topic_slug)
+  def get_useful_links(self):
     return UsefulLinkPage.objects.child_of(self).live()
 
   def get_categories(self, links):
@@ -57,24 +52,29 @@ class UsefulLinkListingPage(RoutablePageMixin, Page):
         "links": links,
         "categories": categories,
         "topics": topics,
-      }
+      },
     )
 
   @path("category/<category_slug>/")
   def category_useful_links(self, request, category_slug):
     """View function for useful links page displaying links of a given category"""
-    links = self.get_useful_links()
-    categories = self.get_categories(links)
-    topics = self.get_topics(links)
+    all_links = self.get_useful_links()
+    category_links = all_links.filter(categories__slug=category_slug)
+    categories = self.get_categories(all_links)
+    topics = self.get_topics(all_links)
+    category = [x for x in categories if x.slug == category_slug][0]
     return self.render(
       request,
       context_overrides={
-        "links": links,
-        "categories": categories,
+        "links": category_links,
         "topics": topics,
-      }
+        "categories": categories,
+        "category": category,
+        "title": f'{self.title} - Category - {category.name}',
+        "selected_category": category_slug,
+      },
+      template="useful_links/useful_link_tag_page.html"
     )
-
   
   @path("topic/<topic_slug>/")
   def topic_useful_links(self, request, topic_slug):
@@ -83,12 +83,17 @@ class UsefulLinkListingPage(RoutablePageMixin, Page):
     topic_links = all_links.filter(topics__slug=topic_slug)
     categories = self.get_categories(all_links)
     topics = self.get_topics(topic_links)
+    topic_name = [x.name for x in topics if x.slug == topic_slug][0]
     return self.render(
       request,
       context_overrides={
         "links": topic_links,
         "categories": categories,
         "topics": topics,
-      }
+        "topic_name": topic_name,
+        "title": f'{self.title} - Topic - {topic_name}',
+        "selected_topic": topic_slug,
+      },
+      template="useful_links/useful_link_tag_page.html"
     )
   

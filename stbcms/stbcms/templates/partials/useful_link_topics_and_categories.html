@@ -13,7 +13,13 @@
     <ul class="flex flex-wrap items-center">
       {% for category in categories %}
       <li class="m-1">
-        <a href="/useful-links/category/{{ category.slug }}/" class="badge capitalize rounded-none text-slate-900 dark:bg-slate-200 dark:text-slate-800">
+        <a
+          href="/useful-links/category/{{ category.slug }}/"
+          class="
+            badge capitalize rounded-none text-slate-900 
+            {% if category.slug == selected_category %}bg-slate-800 text-white dark:bg-slate-200 dark:text-slate-800{% endif %}
+          "
+        >
           {{ category }}
         </a>
       </li>
@@ -27,7 +33,13 @@
     <ul class="flex flex-wrap items-center">
       {% for topic in topics %}
       <li class="m-1">
-        <a href="/useful-links/topic/{{ topic.slug }}/" class="badge capitalize rounded-none text-slate-900 dark:bg-slate-200 dark:text-slate-800">
+        <a
+          href="/useful-links/topic/{{ topic.slug }}/"
+          class="
+            badge capitalize rounded-none text-slate-900
+            {% if topic.slug == selected_topic %}bg-slate-800 text-white dark:bg-slate-200 dark:text-slate-800{% endif %}
+          "
+        >
           {{ topic }}
         </a>
       </li>

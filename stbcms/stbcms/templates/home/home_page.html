@@ -37,7 +37,9 @@
                       {% include "partials/event_slim.html" with event=featured_event %}
                     </a>
                   </div>
-                  <a href="/events" class="px-2 inline-block font-bold text-emerald-500">See more events</a>
+                  <a href="/events" class="px-2 inline-block font-bold text-emerald-500 hover:underline">
+                    See more events
+                  </a>
                 </div>
               {% endif %}
               {% if featured_blog_post %}
@@ -48,7 +50,7 @@
                       {% include "partials/blog_post_slim.html" with post=featured_blog_post %}
                     </a>
                   </div>
-                  <a href="/blog" class="px-2 inline-block font-bold text-emerald-500">
+                  <a href="/blog" class="px-2 inline-block font-bold text-emerald-500 hover:underline">
                     See more blog posts
                   </a>
                 </div>
@@ -67,7 +69,7 @@
                       {% endfor %}
                     </ul>
                   </div>
-                  <a href="/useful-links" class="px-2 inline-block font-bold text-emerald-500">
+                  <a href="/useful-links" class="px-2 inline-block font-bold text-emerald-500 hover:underline">
                     See more useful links
                   </a>
                 </div>
