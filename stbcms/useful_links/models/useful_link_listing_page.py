@@ -1,12 +1,14 @@
 from django.db import models
 
+from wagtailseo.models import SeoMixin
+
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.models import Page
 
 from .useful_link_page import UsefulLinkPage
 
-class UsefulLinkListingPage(RoutablePageMixin, Page):
+class UsefulLinkListingPage(SeoMixin, RoutablePageMixin, Page):
   header_text = models.TextField(max_length=500)
   disable_tags = models.BooleanField(
     default=False,
@@ -22,6 +24,8 @@ class UsefulLinkListingPage(RoutablePageMixin, Page):
       heading="Feature Flags"
     )
   ]
+
+  promote_panels = SeoMixin.seo_meta_panels + SeoMixin.seo_menu_panels
 
   parent_page_types = ["home.HomePage"]
   subpage_types = ["useful_links.UsefulLinkPage"]
