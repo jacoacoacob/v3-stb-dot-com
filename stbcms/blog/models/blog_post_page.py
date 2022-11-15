@@ -2,6 +2,8 @@ import uuid
 
 from django.db import models
 
+from wagtailseo.models import SeoMixin, SeoType, TwitterCard
+
 from wagtail.admin.panels import FieldPanel
 from wagtail.blocks import RichTextBlock, StructBlock, TextBlock
 from wagtail.fields import RichTextField, StreamField
@@ -19,7 +21,8 @@ BODY_TEXT_FEATURES = [
   "link"
 ]
 
-class BlogPostPage(Page):
+class BlogPostPage(SeoMixin, Page):
+  # Database fields
   uid_slug = models.UUIDField(default=uuid.uuid4)
   teaser = RichTextField(max_length=240, features=[])
   body = StreamField(
@@ -46,13 +49,21 @@ class BlogPostPage(Page):
     auto_now=True,
   )
 
+  # Editor panels config
   content_panels = Page.content_panels + [
     FieldPanel("teaser"),
     FieldPanel("body")
   ]
 
+  promote_panels = SeoMixin.seo_meta_panels + SeoMixin.seo_menu_panels
+
+  # Parent page / subpage type rules
   parent_page_types = ["blog.BlogPostListingPage"]
   subpage_types = []
+
+  # SEO config
+  seo_content_type = SeoType.ARTICLE
+  seo_twitter_card = TwitterCard.SUMMARY
 
   def clean(self):
     self.slug = str(self.uid_slug)

@@ -1,6 +1,8 @@
 from django.db import models
 from django.forms import ValidationError
 
+from wagtailseo.models import SeoMixin
+
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.blocks import RichTextBlock, PageChooserBlock, StructBlock, ListBlock
 from wagtail.models import Page
@@ -38,7 +40,8 @@ class FeaturedPagesBlock(StructBlock):
     )
     
 
-class HomePage(Page):
+class HomePage(SeoMixin, Page):
+    # Database fields
     body = StreamField(
         [
             ("hero", HeroBlock()),
@@ -58,6 +61,7 @@ class HomePage(Page):
         help_text="Check this box to hide the bouncing arrow that appears below the hero section."
     )
 
+    # Editor panels config
     content_panels = Page.content_panels + [
         FieldPanel("body"),
         MultiFieldPanel(
@@ -68,6 +72,9 @@ class HomePage(Page):
         )
     ]
 
+    promote_panels = SeoMixin.seo_meta_panels
+
+    # Parent page / subpage type rules
     parent_page_types = []
     subpage_types = [
         "blog.BlogPostListingPage",

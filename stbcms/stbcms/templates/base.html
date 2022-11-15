@@ -18,21 +18,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        {% with settings=settings.core.SiteSettings %}
-        {% block social_meta_tags %}
-            <meta name="twitter:card" content="summary" />
-            <meta name="twitter:site" content="@{{ settings.twitter_handle }}" />
-            {% wagtail_site as current_site %}
-            <meta name="twitter:title" content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% if current_site and current_site.site_name %} - {{ current_site.site_name }}{% endif %}" />
-            <meta name="twitter:description" content="{{ page.search_description }}" />
-
-            <meta property="og:url" content="{{ page.full_url }}" />
-            {% wagtail_site as current_site %}
-            <meta property="og:title" content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% if current_site and current_site.site_name %} - {{ current_site.site_name }}{% endif %}" />
-            <meta property="og:description" content="{{ page.search_description }}" />
-            <meta property="og:type" content="website" />
-        {% endblock %}
-        {% endwith %}
+        {% include "wagtailseo/meta.html" %}
 
         {# Force all links in the live preview panel to be opened in a new tab #}
         {% if request.in_preview_panel %}
@@ -64,6 +50,8 @@
         {% if not request.is_preview and "localhost" not in request.META.HTTP_HOST %}
         <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7b969530a02444df90457c3409deb315"}'></script>
         {% endif %}
+
+        {% include "wagtailseo/struct_data.html" %}
 
     </body>
 </html>
