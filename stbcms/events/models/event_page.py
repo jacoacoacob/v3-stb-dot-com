@@ -3,6 +3,8 @@ import uuid
 
 from django.db import models
 
+from wagtailseo.models import SeoMixin
+
 from wagtail.fields import RichTextField, StreamField
 from wagtail.blocks import ListBlock
 from wagtail.models import Page
@@ -11,7 +13,7 @@ from wagtail.admin.panels import FieldPanel
 from blocks.models import ComplexDateTimeRangeBlock
 
 
-class EventPage(Page):
+class EventPage(SeoMixin, Page):
   uid_slug = models.UUIDField(default=uuid.uuid4)
   listing_description = models.TextField(
     max_length=2000,
@@ -63,6 +65,8 @@ class EventPage(Page):
     FieldPanel("location_link"),
     # FieldPanel("include_contact_link"),
   ]
+
+  promote_panels = SeoMixin.seo_meta_panels + SeoMixin.seo_menu_panels
 
   parent_page_types = ["events.EventListingPage"]
   subpage_types = []

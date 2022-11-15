@@ -1,10 +1,14 @@
+from wagtailseo.models import SeoMixin
+
 from wagtail.models import Page
 
 from .event_page import EventPage
 
-class EventListingPage(Page):
+class EventListingPage(SeoMixin, Page):
   parent_page_types = ["home.HomePage"]
   subpage_types = ["events.EventPage"]
+
+  promote_panels = SeoMixin.seo_meta_panels + SeoMixin.seo_menu_panels
   
   def get_events(self):
     return EventPage.objects.child_of(self).live()
