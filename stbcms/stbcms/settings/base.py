@@ -80,11 +80,7 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
 
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
-
-    "wagtail_2fa.middleware.VerifyUserMiddleware",
 ]
-
-WAGTAIL_2FA_REQUIRED = True
 
 ROOT_URLCONF = "stbcms.urls"
 

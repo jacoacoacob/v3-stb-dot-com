@@ -42,9 +42,15 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
 
+MIDDLEWARE += [
+    "wagtail_2fa.middleware.VerifyUserMiddleware",
+]
+
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+WAGTAIL_2FA_REQUIRED = True
 
 WAGTAILFRONTENDCACHE = {
     "cloudflare": {
