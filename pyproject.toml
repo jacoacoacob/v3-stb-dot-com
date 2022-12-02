@@ -18,6 +18,8 @@ whitenoise = "^6.2.0"
 django-debug-toolbar = "^3.6.0"
 psycopg2 = "^2.9.5"
 wagtail-seo = "^2.3.0"
+# wagtail-2fa = "^1.6.3"
+wagtail-2fa = { git = "https://github.com/labd/wagtail-2fa.git", rev = "f029a7c0838e763ae77ce0d292604bacf8c5833e" }
 
 [tool.poetry.dev-dependencies]
 
