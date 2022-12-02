@@ -55,11 +55,17 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.sitemaps",
+
     "whitenoise.runserver_nostatic",
+
     "django.contrib.staticfiles",
 
     "wagtailseo",
     "storages",
+
+    "wagtail_2fa",
+    "django_otp",
+    "django_otp.plugins.otp_totp",
 ]
 
 MIDDLEWARE = [
@@ -74,7 +80,11 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
 
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+
+    "wagtail_2fa.middleware.VerifyUserMiddleware",
 ]
+
+WAGTAIL_2FA_REQUIRED = True
 
 ROOT_URLCONF = "stbcms.urls"
 

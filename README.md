@@ -30,6 +30,25 @@ _the command `showmigrations` is useful to see which migrations have been applie
 6. remove the app from INSTALLED_APPS in your settings file
 
 
+### Backup and restore the database
+
+#### Backup
+```
+pg_dump -U <your-database-user> -d <your-database-name> --clean --verbose > /path/to/backup/<database-name>_<current-git-commit-sha>.sql
+```
+
+#### Restore
+Run the script found in [./dev-database/init.sh](./dev-database/init.sh) (or execute the commands within) to initialize the database.
+
+Then, run
+```
+psql -U <your-database-user> -d <your-database-name> -f <path-to-your-backup.sql>
+```
+Use `python manage.py showmigrations` to see if there are any migrations that haven't been applied. This can happen if a Wagtail update that created new migrations happened between now and when you applied applied the migrations reflected in your backup. Run `python manage.py migrate` to apply any unapplied migrations if they exist.
+
+You should be good to go now.
+
+
 # Deploy Checklist
 - [ ] (PRE-DEPLOY) `makemigrations`
 - [ ] `migrate`
